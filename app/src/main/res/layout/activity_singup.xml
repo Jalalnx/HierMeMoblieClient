@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:layout_gravity="right"
-                android:fontFamily="@font/tajawal_medium"
+
                 android:text="تسجيل حساب "
                 android:textSize="20sp" />
 
@@ -77,12 +77,10 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
-                android:fontFamily="@font/tajawal_medium"
                 android:hint="الاسم الاول ">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/l_name"
-                    android:fontFamily="@font/tajawal_medium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="#EB4B51"
@@ -96,12 +94,10 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
-                android:fontFamily="@font/tajawal_medium"
                 android:hint="الاسم الثاني ">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/f_name"
-                    android:fontFamily="@font/tajawal_medium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="#EB4B51"
@@ -123,7 +119,6 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/phon_namber"
                     android:layout_width="match_parent"
-                    android:fontFamily="@font/tajawal_medium"
                     android:layout_height="wrap_content"
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -147,7 +142,6 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/email"
                     android:layout_width="match_parent"
-                    android:fontFamily="@font/tajawal_medium"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -167,7 +161,6 @@
                     android:id="@+id/adress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/tajawal_medium"
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
             <Space
@@ -185,7 +178,6 @@
 
                 <AutoCompleteTextView
                     android:id="@+id/IDTYPE"
-                    android:fontFamily="@font/tajawal_medium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
@@ -209,7 +201,6 @@
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/tajawal_medium"
                     android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -228,7 +219,6 @@
                 <RadioButton
                     android:id="@+id/male"
                     android:layout_width="wrap_content"
-                    android:fontFamily="@font/tajawal_black"
                     android:layout_height="wrap_content"
                     android:text="ذكر*" />
                 <Space
@@ -238,7 +228,6 @@
                 <RadioButton
                     android:id="@+id/femal"
                     android:layout_width="wrap_content"
-                    android:fontFamily="@font/tajawal_black"
                     android:layout_height="wrap_content"
                     android:text="أنثي*" />
             </RadioGroup>
@@ -251,7 +240,6 @@
                 android:layout_above="@+id/GOback"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
-                android:fontFamily="@font/tajawal_bold"
                 android:layout_marginBottom="7dp"
                 android:background="@drawable/round_btn"
                 android:gravity="center"
