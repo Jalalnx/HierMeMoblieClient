@@ -50,7 +50,6 @@ private MeowBottomNavigation meowBottomNavigation;
                     case 4 :
                         fragment = new MyAppliction();
                         break;
-
                     default:
                         fragment = new HomeFragment();
                 }
@@ -60,7 +59,7 @@ private MeowBottomNavigation meowBottomNavigation;
         });
 
         meowBottomNavigation.setCount(2 ,"10");
-//        meowBottomNavigation.show(3,true);
+        meowBottomNavigation.show(3,true);
         meowBottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
             @Override
             public void onClickItem(MeowBottomNavigation.Model item) {
