@@ -24,8 +24,9 @@
         app:mbn_countBackgroundColor="#ff6f00"
         app:mbn_countTextColor="#ffffff"
         app:mbn_defaultIconColor="#90a4ae"
-        app:mbn_rippleColor="#2f424242"
-        app:mbn_selectedIconColor="#3c415e"
+        
+        app:mbn_rippleColor="#4AC364"
+        app:mbn_selectedIconColor="#BED82E22"
         app:mbn_shadowColor="#1f212121"
         />
 

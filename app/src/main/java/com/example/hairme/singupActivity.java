@@ -20,13 +20,21 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.example.hairme.Services.Mysingleton;
 import com.google.android.material.textfield.TextInputEditText;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -35,6 +43,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -45,7 +55,7 @@ public class singupActivity extends AppCompatActivity {
     android.widget.Button Btn45, rgestrion;
     CircleImageView userImgae;
     android.widget.RadioGroup gender;
-    TextInputEditText f_name ,l_name, phone, email, profession,Adress, passowrd;
+    TextInputEditText f_name, l_name, phone, email, profession, Adress, passowrd;
     int bitmap_size = 60;
     public Uri mMediaUri;
     private Bitmap bitmap, decoded;
@@ -56,7 +66,9 @@ public class singupActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_CANCELED) { return; }
+        if (resultCode == RESULT_CANCELED) {
+            return;
+        }
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_TAKE_PHOTO && data != null && data.getData() != null) {
                 try {
@@ -69,11 +81,13 @@ public class singupActivity extends AppCompatActivity {
             }
         }
     }
+
     private void getPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
             return;
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_EXTERNAL_STORAGE);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,10 +101,10 @@ public class singupActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         Adress = findViewById(R.id.adress);
         gender = findViewById(R.id.group);
-        rgestrion =findViewById(R.id.reg);
+        rgestrion = findViewById(R.id.reg);
         userImgae = findViewById(R.id.takePhoto);
 
-        String[] type = new String[]{" مهندس", "طبيب ","عازف ","عامل حر","مصمم ","طيار","مبرمج","مدير تنفيذي","عامل"};
+        String[] type = new String[]{" مهندس", "طبيب ", "عازف ", "عامل حر", "مصمم ", "طيار", "مبرمج", "مدير تنفيذي", "عامل"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, type);
         AutoCompleteTextView editTextFilledExposedDropdown = findViewById(R.id.IDTYPE);
         editTextFilledExposedDropdown.setAdapter(adapter);
@@ -104,10 +118,10 @@ public class singupActivity extends AppCompatActivity {
             String textEmailemail = Objects.requireNonNull(email.getText()).toString();
             String textAdress = Objects.requireNonNull(Adress.getText()).toString();
             String textPassword = Objects.requireNonNull(passowrd.getText()).toString();
-            if (textusername.length() == 0 ||!textusername.matches("[a-zA-Z ]+")) {
+            if (textusername.length() == 0 || !textusername.matches("[a-zA-Z ]+")) {
                 f_name.requestFocus();
                 f_name.setError("FIELD CANNOT BE EMPTY");
-            } else if (textL_ame.length() == 0 ||!textL_ame.matches("[a-zA-Z ]+")) {
+            } else if (textL_ame.length() == 0 || !textL_ame.matches("[a-zA-Z ]+")) {
                 l_name.requestFocus();
                 l_name.setError("ENTER ONLY ALPHABETICAL CHARACTER");
             } else if (textPhonenumber.length() == 0) {
@@ -156,47 +170,46 @@ public class singupActivity extends AppCompatActivity {
         });
 
 
-
     }
 
 
     private void newAccount(String first_name, String Last_name, String Phone, String profession, String email, String Adress, String gender, String Passcode) {
 
         StringRequest request = new StringRequest(com.android.volley.Request.Method.POST, URL_REGISTER, response -> {
-                    if (response.equals("done")) {
-                        Objects.requireNonNull(this.l_name.getText()).clear();
-                        Objects.requireNonNull(this.f_name.getText()).clear();
-                        Objects.requireNonNull(this.phone.getText()).clear();
-                        Objects.requireNonNull(this.passowrd.getText()).clear();
-                        Objects.requireNonNull(this.Adress.getText()).clear();
+            if (response.equals("done")) {
+                Objects.requireNonNull(this.l_name.getText()).clear();
+                Objects.requireNonNull(this.f_name.getText()).clear();
+                Objects.requireNonNull(this.phone.getText()).clear();
+                Objects.requireNonNull(this.passowrd.getText()).clear();
+                Objects.requireNonNull(this.Adress.getText()).clear();
 //                        this.userImgae.setImageResource(0);
 
-                        android.widget.Toast.makeText(getApplicationContext(), response, android.widget.Toast.LENGTH_LONG).show();
-                        startActivity(new android.content.Intent(this, LoginActivity.class));
+                android.widget.Toast.makeText(getApplicationContext(), response, android.widget.Toast.LENGTH_LONG).show();
+                startActivity(new android.content.Intent(this, LoginActivity.class));
 
-                    } else {
+            } else {
 
-                        android.widget.Toast.makeText(singupActivity.this, response, android.widget.Toast.LENGTH_LONG).show();
-                    }
-                }, error -> {
+                android.widget.Toast.makeText(singupActivity.this, response, android.widget.Toast.LENGTH_LONG).show();
+            }
+        }, error -> {
 //                    hud.dismiss();
-                    android.widget.Toast.makeText(singupActivity.this, error.toString(), android.widget.Toast.LENGTH_LONG).show();
-                }) {
-                    @Override
-                    protected java.util.Map<String, String> getParams() {
-                        java.util.HashMap<String, String> prime = new java.util.HashMap<>();
-                        prime.put("f_name", first_name);
-                        prime.put("l_name", Last_name);
-                        prime.put("phone", Phone);
-                        prime.put("Email", email);
-                        prime.put("gender", gender);
-                        prime.put("adress", Adress);
-                        prime.put("profession", profession);
-                        prime.put("password", Passcode);
-                        prime.put("photo", getStringImage(decoded));
-                        return prime;
-                    }
-                };
+            android.widget.Toast.makeText(singupActivity.this, error.toString(), android.widget.Toast.LENGTH_LONG).show();
+        }) {
+            @Override
+            protected java.util.Map<String, String> getParams() {
+                java.util.HashMap<String, String> prime = new java.util.HashMap<>();
+                prime.put("f_name", first_name);
+                prime.put("l_name", Last_name);
+                prime.put("phone", Phone);
+                prime.put("Email", email);
+                prime.put("gender", gender);
+                prime.put("adress", Adress);
+                prime.put("profession", profession);
+                prime.put("password", Passcode);
+                prime.put("photo", getStringImage(decoded));
+                return prime;
+            }
+        };
         request.setRetryPolicy(new com.android.volley.DefaultRetryPolicy
                 (30000, com.android.volley.DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                         com.android.volley.DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
@@ -204,6 +217,7 @@ public class singupActivity extends AppCompatActivity {
         Mysingleton.getInstance(singupActivity.this).addToReguestQueu(request);
 
     }
+
     public String getStringImage(Bitmap bmp) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, bitmap_size, baos);
@@ -255,7 +269,7 @@ public class singupActivity extends AppCompatActivity {
         return null;
     }
 
-    public  Bitmap getResizedBitmap(Bitmap image, int maxSize) {
+    public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
         Toast.makeText(this, "2", Toast.LENGTH_LONG).show();
         int width = image.getWidth();
         int height = image.getHeight();
@@ -283,54 +297,59 @@ public class singupActivity extends AppCompatActivity {
         userImgae.setImageBitmap(decoded);
     }
 
+
+//    public void signup(String ffirstname, String llastname, String uuMail, String uuPhone, String ffpassword) {
+//        com.kaopiz.kprogresshud.KProgressHUD prog = com.kaopiz.kprogresshud.KProgressHUD.create(this)
+//                .setStyle(com.kaopiz.kprogresshud.KProgressHUD.Style.SPIN_INDETERMINATE)
+//                .setLabel("الرجاء الانتظار")
+//                .setDetailsLabel("يتم معالجة طلبك ")
+//                .setCancellable(false)
+//                .setAnimationSpeed(2)
+//                .setDimAmount(0.5f)
+//                .setSize(200, 200)
+//                .show();
+        //String URL = "http://192.168.137.1:8000/mobile/user/New_Acount";
+//        HashMap<String, String> params = new HashMap<String, String>();
+//        params.put("f_name", ffirstname);
+//        params.put("l_name", llastname);
+//        params.put("phone", uuPhone);
+//        params.put("Email", uuMail);
+//        params.put("password", ffpassword);
+//
+//        JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, URLS.URL_REGISTER, new JSONObject(params), new Response.Listener<JSONObject>() {
+//            @Override
+//            public void onResponse(JSONObject response) {
+//                try {
+//                    if (response.getBoolean("error"))
+//                        ///replace tosat with dilog
+//                        Toast.makeText(getApplicationContext(), "Response:  " + response.getString("message"), Toast.LENGTH_SHORT).show();
+//                    else {
+//                        View v = new View(getApplicationContext());
+//
+//                        JSONObject jsonArry = response.getJSONObject("user");
+//                        Toast.makeText(getApplicationContext(), "Response:  " + jsonArry, Toast.LENGTH_SHORT).show();
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Toast.makeText(getApplicationContext(), "Response:  " + error.getMessage(), Toast.LENGTH_SHORT).show();
+////                    onBackPressed();
+//            }
+//        }) {
+//            @Override
+//            public Map<String, String> getHeaders() {
+//                final Map<String, String> headers = new HashMap<>();
+////                    headers.put("Accept", "application/json" );//put your token here
+////                    headers.put("Content-Type", "application/json" );//put your token here
+////                    headers.put("Connection", "keep-alive" );//put your token here
+//                return headers;
+//            }
+//        };
+////        Mysingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonOblect);
+//    }
+
 }
-
-/*
-* public void signup(){
-
-            String URL = "http://192.168.137.1:8000/mobile/user/New_Acount";
-//            JSONObject jsonBody = new JSONObject();
-//
-//            jsonBody.put("f_name", "abc@abc.com");
-//            jsonBody.put("l_name", "jdvjsdvs");
-//            jsonBody.put("phone", "872342");
-//            jsonBody.put("Email", "sfdjd");
-//            jsonBody.put("password", "dnfgkjgf");
-            HashMap<String, String> params = new HashMap<String, String>();
-            params.put("f_name", "jghbh");
-            params.put("l_name", "kbilkkljvblhj");
-            params.put("phone","09976");
-            params.put("Email", "holjhbklj@gmail.com");
-            params.put("password", "gbiugb8iu8");
-
-            JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, URL,  new JSONObject(params), new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    Toast.makeText(getApplicationContext(), "Response:  " + response.toString(), Toast.LENGTH_SHORT).show();
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-
-                        Toast.makeText(getApplicationContext(), "Response:  " + error, Toast.LENGTH_SHORT).show();
-//
-//                    onBackPressed();
-
-                }
-            }) {
-                @Override
-                public Map<String, String> getHeaders() {
-                    final Map<String, String> headers = new HashMap<>();
-//                    headers.put("Accept", "application/json" );//put your token here
-//                    headers.put("Content-Type", "application/json" );//put your token here
-//                    headers.put("Connection", "keep-alive" );//put your token here
-                    return headers;
-                }
-            };
-            VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonOblect);
-
-
-//        Toast.makeText(getApplicationContext(), "done", Toast.LENGTH_LONG).show();
-
-    }
-* */

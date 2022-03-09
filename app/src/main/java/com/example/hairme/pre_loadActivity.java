@@ -122,7 +122,7 @@ public class pre_loadActivity extends AppCompatActivity {
 
     private void launchSplashscreen() {
         prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(pre_loadActivity.this, SplashScreenActivity.class));
+        startActivity(new Intent(pre_loadActivity.this, LoginActivity.class));
         finish();
     }
 

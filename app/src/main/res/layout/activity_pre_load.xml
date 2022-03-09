@@ -14,7 +14,7 @@
     <LinearLayout
         android:id="@+id/layoutDots"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/dots_margin_bottom"
         android:gravity="center"
@@ -27,7 +27,7 @@
         android:layout_above="@id/layoutDots"
         android:background="@android:color/white" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,9 +35,9 @@
         android:layout_alignParentRight="true"
         android:background="@null"
         android:text="next"
-        android:textColor="@android:color/white" />
+        android:textColor="#FF4081" />
 
-    <Button
+   <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_skip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,6 +45,6 @@
         android:layout_alignParentLeft="true"
         android:background="@null"
         android:text="skip"
-        android:textColor="@android:color/white" />
+        android:textColor="#FF4081" />
 
 </RelativeLayout>
