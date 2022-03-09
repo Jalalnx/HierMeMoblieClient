@@ -14,10 +14,6 @@ public class Mysingleton {
     //https://diligent-bails.000webhostapp.com/load.php
 
 
-    ////INSERT INTO `emg_phone`
-    // (`id`, `departmen`, `phone_number`, `image`) VALUES ('1', 'الشرطه النجده', '999',
-    // 'https://diligent-bails.000webhostapp.com/image/3.png'),
-    // ('2', 'عمليات المرور', '77777', 'https://diligent-bails.000webhostapp.com/image/4.png');
 
     public Mysingleton(Context mCtx) {
         this.mCtx = mCtx;

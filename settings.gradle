@@ -3,15 +3,19 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
+        jcenter()
     }
 }
 dependencyResolutionManagement {
     enableFeaturePreview("VERSION_CATALOGS")
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
         google()
+        jcenter()
         mavenCentral()
     }
 }
 rootProject.name = "HairMe"
 include ':app'
+//include ':MeowBottomNavigation'

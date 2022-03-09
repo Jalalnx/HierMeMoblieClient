@@ -284,3 +284,53 @@ public class singupActivity extends AppCompatActivity {
     }
 
 }
+
+/*
+* public void signup(){
+
+            String URL = "http://192.168.137.1:8000/mobile/user/New_Acount";
+//            JSONObject jsonBody = new JSONObject();
+//
+//            jsonBody.put("f_name", "abc@abc.com");
+//            jsonBody.put("l_name", "jdvjsdvs");
+//            jsonBody.put("phone", "872342");
+//            jsonBody.put("Email", "sfdjd");
+//            jsonBody.put("password", "dnfgkjgf");
+            HashMap<String, String> params = new HashMap<String, String>();
+            params.put("f_name", "jghbh");
+            params.put("l_name", "kbilkkljvblhj");
+            params.put("phone","09976");
+            params.put("Email", "holjhbklj@gmail.com");
+            params.put("password", "gbiugb8iu8");
+
+            JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, URL,  new JSONObject(params), new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Toast.makeText(getApplicationContext(), "Response:  " + response.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                        Toast.makeText(getApplicationContext(), "Response:  " + error, Toast.LENGTH_SHORT).show();
+//
+//                    onBackPressed();
+
+                }
+            }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    final Map<String, String> headers = new HashMap<>();
+//                    headers.put("Accept", "application/json" );//put your token here
+//                    headers.put("Content-Type", "application/json" );//put your token here
+//                    headers.put("Connection", "keep-alive" );//put your token here
+                    return headers;
+                }
+            };
+            VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonOblect);
+
+
+//        Toast.makeText(getApplicationContext(), "done", Toast.LENGTH_LONG).show();
+
+    }
+* */

@@ -2,7 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.hairme">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SOCIAL_STREAM" />
+    <uses-permission android:name=" MANAGE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,8 +16,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HairMe">
         <activity
+            android:name=".SandBox"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".singupActivity"
-            android:exported="false" />
+            android:exported="true"/>
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
@@ -23,11 +36,7 @@
         <activity
             android:name=".pre_loadActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"

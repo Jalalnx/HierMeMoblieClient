@@ -27,7 +27,7 @@
 
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_height="60dp"
             android:hint="البريد الالكتروني ">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -35,7 +35,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#B87F9E"
-                android:drawableRight="@drawable/usericon"
                 android:fontFamily="@font/tajawal_medium"
                 android:inputType="textWebEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -65,25 +64,17 @@
             android:layout_width="30dip"
             android:layout_height="20dp" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/let_user_login"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
+            android:shadowColor="@color/bg_screen1"
             android:layout_marginBottom="5dp"
             android:background="@drawable/round_btn"
             android:drawableStart="@drawable/ic_baseline_arrow_forward_ios_24"
             />
-
-        <Button
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/round_btn"
-            android:drawableStart="@drawable/ic_baseline_arrow_forward_ios_24"/>
 
         <Button
             android:id="@+id/rig"
