@@ -4,6 +4,7 @@ import static com.example.hairme.Services.URLs.URL_REGISTER;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -23,6 +24,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -41,6 +43,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -52,8 +55,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class singupActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getSimpleName();
-    android.widget.Button Btn45, rgestrion;
-    CircleImageView userImgae;
+    AppCompatImageButton Btn45, rgestrion;
+    ImageView userImgae;
     android.widget.RadioGroup gender;
     TextInputEditText f_name, l_name, phone, email, profession, Adress, passowrd;
     int bitmap_size = 60;
@@ -64,24 +67,25 @@ public class singupActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_CANCELED) {
-            return;
-        }
+    protected void onActivityResult(int reqCode, int resultCode, Intent data) {
+        super.onActivityResult(reqCode, resultCode, data);
+
+
         if (resultCode == RESULT_OK) {
-            if (requestCode == REQUEST_TAKE_PHOTO && data != null && data.getData() != null) {
-                try {
-                    Toast.makeText(this, "1", Toast.LENGTH_LONG).show();
-                    bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(mMediaUri));
-                    setToImageView(getResizedBitmap(bitmap, 512));
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+            try {
+                final Uri imageUri = data.getData();
+                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                userImgae.setImageBitmap(selectedImage);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Toast.makeText(singupActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
             }
+
+        }else {
+            Toast.makeText(singupActivity.this, "You haven't picked Image",Toast.LENGTH_LONG).show();
         }
     }
-
     private void getPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
             return;
@@ -156,17 +160,10 @@ public class singupActivity extends AppCompatActivity {
 
         });
         findViewById(R.id.takePhoto).setOnClickListener(view -> {
-
-            if (mMediaUri == null) {
-                Toast.makeText(this,
-                        "There was a problem accessing your device's external storage.",
-                        Toast.LENGTH_LONG).show();
-            } else {
-                mMediaUri = getOutputMediaFileUri();
-                Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, mMediaUri);
-                startActivityForResult(takePhotoIntent, REQUEST_TAKE_PHOTO);
-            }
+            Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+            photoPickerIntent.setType("image/*");
+            startActivityForResult(photoPickerIntent, REQUEST_TAKE_PHOTO);
+//            }
         });
 
 

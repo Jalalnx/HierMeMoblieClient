@@ -33,38 +33,25 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:orientation="vertical"
-            android:padding="30dp">
+            android:padding="50dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_gravity="right"
-
-                android:text="تسجيل حساب "
-                android:textSize="20sp" />
-
-
-            <View
-                android:layout_width="130dp"
-                android:layout_height="7dp"
-                android:layout_gravity="right"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="15dp"
-                android:background="#B87F9E" />
-
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/takePhoto"
-                android:layout_width="160dp"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_height="160dp"
-                android:layout_centerInParent="true"
+                android:layout_width="160dp"
+                android:background="@drawable/round_btn"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:visibility="visible"
-                android:src="@drawable/ic_baseline_account_circle_24"
+                app:cardCornerRadius="100dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:checkable="true">
+                <ImageView
+                    android:id="@+id/takePhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
 
-                app:civ_border_width="1dp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
 
 
 
@@ -195,10 +182,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="كلمة السر"
+                android:background="@drawable/inputcustom"
                 app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/password"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress" />
@@ -233,20 +222,21 @@
             </RadioGroup>
 
 
-            <Button
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/reg"
-                android:layout_width="329dp"
-                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="51dp"
                 android:layout_above="@+id/GOback"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="7dp"
                 android:background="@drawable/round_btn"
                 android:gravity="center"
-                android:textSize="20dp"
+                android:src="@mipmap/img"
                 android:text="تسجيل"
                 android:textAlignment="center"
-                android:textColor="#fff" />
+                android:textColor="#B87F9E"
+                android:textSize="20dp" />
 
 
         </LinearLayout>
