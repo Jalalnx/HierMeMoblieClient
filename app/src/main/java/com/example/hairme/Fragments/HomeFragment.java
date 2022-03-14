@@ -15,6 +15,8 @@ import com.example.hairme.R;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
+//https://www.simplifiedcoding.net/upload-pdf-file-server-android/
 public class HomeFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match

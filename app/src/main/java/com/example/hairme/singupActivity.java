@@ -1,7 +1,5 @@
 package com.example.hairme;
 
-import static com.example.hairme.Services.URLs.URL_REGISTER;
-
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageButton;
@@ -18,12 +16,12 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -31,8 +29,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.example.hairme.Services.Mysingleton;
+import com.example.hairme.Services.URLs;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;
@@ -49,7 +46,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 @SuppressWarnings("ALL")
 public class singupActivity extends AppCompatActivity {
@@ -60,11 +56,11 @@ public class singupActivity extends AppCompatActivity {
     android.widget.RadioGroup gender;
     TextInputEditText f_name, l_name, phone, email, profession, Adress, passowrd;
     int bitmap_size = 60;
-    public Uri mMediaUri;
+    public Uri mMediaUri,path;
     private Bitmap bitmap, decoded;
     public static final int REQUEST_TAKE_PHOTO = 1;
     public static final int WRITE_EXTERNAL_STORAGE = 123;
-
+    String imageString ;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onActivityResult(int reqCode, int resultCode, Intent data) {
@@ -74,9 +70,11 @@ public class singupActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             try {
                 final Uri imageUri = data.getData();
+                path =imageUri;
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                 userImgae.setImageBitmap(selectedImage);
+//                encode(path);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 Toast.makeText(singupActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
@@ -90,6 +88,17 @@ public class singupActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
             return;
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_EXTERNAL_STORAGE);
+    }
+
+
+    public String encode(Uri path) throws FileNotFoundException {
+        //encode image to base64 string
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final InputStream imageStream = getContentResolver().openInputStream(path);
+        final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+        selectedImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        return Base64.encodeToString(imageBytes, Base64.DEFAULT);
     }
 
     @Override
@@ -106,6 +115,7 @@ public class singupActivity extends AppCompatActivity {
         Adress = findViewById(R.id.adress);
         gender = findViewById(R.id.group);
         rgestrion = findViewById(R.id.reg);
+        passowrd = findViewById(R.id.password);
         userImgae = findViewById(R.id.takePhoto);
 
         String[] type = new String[]{" مهندس", "طبيب ", "عازف ", "عامل حر", "مصمم ", "طيار", "مبرمج", "مدير تنفيذي", "عامل"};
@@ -115,13 +125,13 @@ public class singupActivity extends AppCompatActivity {
 
 
         rgestrion.setOnClickListener(view -> {
-            String textusername = Objects.requireNonNull(f_name.getText()).toString();
-            String textL_ame = Objects.requireNonNull(l_name.getText()).toString();
-            String textPhonenumber = Objects.requireNonNull(phone.getText()).toString();
-            String profession = editTextFilledExposedDropdown.getText().toString();
-            String textEmailemail = Objects.requireNonNull(email.getText()).toString();
-            String textAdress = Objects.requireNonNull(Adress.getText()).toString();
-            String textPassword = Objects.requireNonNull(passowrd.getText()).toString();
+            String textusername = f_name.getText().toString().trim();
+            String textL_ame = l_name.getText().toString().trim();
+            String textPhonenumber =phone.getText().toString().trim();
+            String profession = editTextFilledExposedDropdown.getText().toString().trim();
+            String textEmailemail = email.getText().toString().trim();
+            String textAdress = Adress.getText().toString().trim();
+            String textPassword = passowrd.getText().toString().trim();
             if (textusername.length() == 0 || !textusername.matches("[a-zA-Z ]+")) {
                 f_name.requestFocus();
                 f_name.setError("FIELD CANNOT BE EMPTY");
@@ -152,7 +162,11 @@ public class singupActivity extends AppCompatActivity {
                 } else {
                     String textSelectedGorup = SelectedGender.getText().toString();
 
-                    newAccount(textusername, textL_ame, textPhonenumber, profession, textEmailemail, textAdress, textSelectedGorup, textPassword);
+                    try {
+                        newAccount(textusername, textL_ame, textPhonenumber, profession, textEmailemail, textAdress, textSelectedGorup, textPassword);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
 
                 }
 
@@ -169,58 +183,6 @@ public class singupActivity extends AppCompatActivity {
 
     }
 
-
-    private void newAccount(String first_name, String Last_name, String Phone, String profession, String email, String Adress, String gender, String Passcode) {
-
-        StringRequest request = new StringRequest(com.android.volley.Request.Method.POST, URL_REGISTER, response -> {
-            if (response.equals("done")) {
-                Objects.requireNonNull(this.l_name.getText()).clear();
-                Objects.requireNonNull(this.f_name.getText()).clear();
-                Objects.requireNonNull(this.phone.getText()).clear();
-                Objects.requireNonNull(this.passowrd.getText()).clear();
-                Objects.requireNonNull(this.Adress.getText()).clear();
-//                        this.userImgae.setImageResource(0);
-
-                android.widget.Toast.makeText(getApplicationContext(), response, android.widget.Toast.LENGTH_LONG).show();
-                startActivity(new android.content.Intent(this, LoginActivity.class));
-
-            } else {
-
-                android.widget.Toast.makeText(singupActivity.this, response, android.widget.Toast.LENGTH_LONG).show();
-            }
-        }, error -> {
-//                    hud.dismiss();
-            android.widget.Toast.makeText(singupActivity.this, error.toString(), android.widget.Toast.LENGTH_LONG).show();
-        }) {
-            @Override
-            protected java.util.Map<String, String> getParams() {
-                java.util.HashMap<String, String> prime = new java.util.HashMap<>();
-                prime.put("f_name", first_name);
-                prime.put("l_name", Last_name);
-                prime.put("phone", Phone);
-                prime.put("Email", email);
-                prime.put("gender", gender);
-                prime.put("adress", Adress);
-                prime.put("profession", profession);
-                prime.put("password", Passcode);
-                prime.put("photo", getStringImage(decoded));
-                return prime;
-            }
-        };
-        request.setRetryPolicy(new com.android.volley.DefaultRetryPolicy
-                (30000, com.android.volley.DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                        com.android.volley.DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        Mysingleton.getInstance(singupActivity.this).addToReguestQueu(request);
-
-    }
-
-    public String getStringImage(Bitmap bmp) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, bitmap_size, baos);
-        byte[] imageBytes = baos.toByteArray();
-        return Base64.encodeToString(imageBytes, Base64.DEFAULT);
-    }
 
     private Uri getOutputMediaFileUri() {
         // check for external storage
@@ -295,58 +257,64 @@ public class singupActivity extends AppCompatActivity {
     }
 
 
-//    public void signup(String ffirstname, String llastname, String uuMail, String uuPhone, String ffpassword) {
-//        com.kaopiz.kprogresshud.KProgressHUD prog = com.kaopiz.kprogresshud.KProgressHUD.create(this)
-//                .setStyle(com.kaopiz.kprogresshud.KProgressHUD.Style.SPIN_INDETERMINATE)
-//                .setLabel("الرجاء الانتظار")
-//                .setDetailsLabel("يتم معالجة طلبك ")
-//                .setCancellable(false)
-//                .setAnimationSpeed(2)
-//                .setDimAmount(0.5f)
-//                .setSize(200, 200)
-//                .show();
-        //String URL = "http://192.168.137.1:8000/mobile/user/New_Acount";
-//        HashMap<String, String> params = new HashMap<String, String>();
-//        params.put("f_name", ffirstname);
-//        params.put("l_name", llastname);
-//        params.put("phone", uuPhone);
-//        params.put("Email", uuMail);
-//        params.put("password", ffpassword);
-//
-//        JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, URLS.URL_REGISTER, new JSONObject(params), new Response.Listener<JSONObject>() {
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                try {
-//                    if (response.getBoolean("error"))
-//                        ///replace tosat with dilog
-//                        Toast.makeText(getApplicationContext(), "Response:  " + response.getString("message"), Toast.LENGTH_SHORT).show();
-//                    else {
-//                        View v = new View(getApplicationContext());
-//
-//                        JSONObject jsonArry = response.getJSONObject("user");
-//                        Toast.makeText(getApplicationContext(), "Response:  " + jsonArry, Toast.LENGTH_SHORT).show();
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(getApplicationContext(), "Response:  " + error.getMessage(), Toast.LENGTH_SHORT).show();
-////                    onBackPressed();
-//            }
-//        }) {
-//            @Override
-//            public Map<String, String> getHeaders() {
-//                final Map<String, String> headers = new HashMap<>();
-////                    headers.put("Accept", "application/json" );//put your token here
-////                    headers.put("Content-Type", "application/json" );//put your token here
-////                    headers.put("Connection", "keep-alive" );//put your token here
-//                return headers;
-//            }
-//        };
-////        Mysingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonOblect);
-//    }
+    private void newAccount(String first_name, String Last_name, String Phone, String profession, String email, String Adress, String gender, String Passcode) throws FileNotFoundException {
+
+        com.kaopiz.kprogresshud.KProgressHUD prog = com.kaopiz.kprogresshud.KProgressHUD.create(this)
+                .setStyle(com.kaopiz.kprogresshud.KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setLabel("الرجاء الانتظار")
+                .setDetailsLabel("يتم معالجة طلبك ")
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+                .setSize(200, 200)
+                .show();
+                String URL = "http://192.168.137.1:8000/mobile/user/New_Acount";
+                HashMap<String, String> params = new HashMap<String, String>();
+            params.put("f_name", first_name);
+            params.put("l_name", Last_name);
+            params.put("phone", Phone);
+            params.put("Email", email);
+            params.put("gender", gender);
+            params.put("adress", Adress);
+            params.put("profession", profession);
+            params.put("password", Passcode);
+            params.put("photo",encode(path));
+
+        JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, URLs.URL_REGISTER, new JSONObject(params), new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    prog.dismiss();
+                    if (response.getBoolean("error"))
+                        ///replace tosat with dilog
+                        Toast.makeText(getApplicationContext(), "Response:  " + response.getString("message"), Toast.LENGTH_SHORT).show();
+                    else {
+
+
+                        JSONObject jsonArry = response.getJSONObject("user");
+                        Toast.makeText(getApplicationContext(), "Response:  " + jsonArry, Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "Response:  " + error.getMessage(), Toast.LENGTH_SHORT).show();
+//                    onBackPressed();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                final Map<String, String> headers = new HashMap<>();
+                    headers.put("Accept", "application/json" );//put your token here
+                    headers.put("Content-Type", "application/json" );//put your token here
+                    headers.put("Connection", "keep-alive" );//put your token here
+                return headers;
+            }
+        };
+//        Mysingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonOblect);
+    }
 
 }
