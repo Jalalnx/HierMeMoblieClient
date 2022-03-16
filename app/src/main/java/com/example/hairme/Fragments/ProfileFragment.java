@@ -7,8 +7,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.example.hairme.Models.UserModle;
 import com.example.hairme.R;
+import com.example.hairme.Services.SharedPrefmanager;
+import com.google.android.material.imageview.ShapeableImageView;
+import com.squareup.picasso.Picasso;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,7 +21,8 @@ import com.example.hairme.R;
  * create an instance of this fragment.
  */
 public class ProfileFragment extends Fragment {
-
+    ShapeableImageView userImge;
+    TextView name,profi,email,phone,edu,gender1;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -61,6 +67,24 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        View root= inflater.inflate(R.layout.fragment_profile, container, false);
+         userImge =root.findViewById(R.id.userprofile);
+         name =root.findViewById(R.id.profile_name);
+        profi =root.findViewById(R.id.profissions);
+        email =root.findViewById(R.id.email);
+        phone =root.findViewById(R.id.phone);
+        edu =root.findViewById(R.id.edu);
+        gender1 =root.findViewById(R.id.gender1);
+
+
+        UserModle user = SharedPrefmanager.getInstance(getActivity()).getUser();
+        Picasso.get().load(user.getPhoto()).fit().centerInside().into(userImge);
+        name.setText(user.getF_name()+" "+user.getL_name());
+        profi.setText(user.getProfession());
+        email.setText(new StringBuilder().append("البريد الاكتروني :").append(user.getEmail()).toString());
+        phone.setText(new StringBuilder().append(" رقم الهاتف :").append(user.getPhone_Number()).toString() );
+        edu.setText(new StringBuilder().append(" المؤهل العلمي :").append(user.getEducation_level()).toString() );
+        gender1.setText(new StringBuilder().append(" الجنس :").append(user.getGender()).toString() );
+        return root;
     }
 }

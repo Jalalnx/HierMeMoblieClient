@@ -5,15 +5,38 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.HomeFragment">
+    <LinearLayout
+        android:id="@+id/heder"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layoutDirection="rtl"
+        android:orientation="horizontal">
 
-<androidx.cardview.widget.CardView
-    android:outlineSpotShadowColor="@color/bg_screen1"
-    android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:contextClickable="true"
-    app:cardPreventCornerOverlap="true"
-    android:layout_margin="20dp"
-    app:cardCornerRadius= "20dp"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/userImg"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="1dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/Wellecomigng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:elevation="0dp"
+            android:fontFamily="@font/tajawal_medium"
+            android:text="000000"
+            android:textSize="18sp" />
+    </LinearLayout>
+
 
 
 </FrameLayout>

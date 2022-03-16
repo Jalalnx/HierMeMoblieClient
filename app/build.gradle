@@ -8,8 +8,8 @@ android {
 
     defaultConfig {
         applicationId "com.example.hairme"
-        minSdk 20
-        targetSdk 24
+        minSdk 26
+        targetSdk 32
         versionCode 1
         versionName "1.0"
 
@@ -30,12 +30,16 @@ android {
 }
 
 dependencies {
+
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.4.1'
 //    implementation 'com.aandroid.suport:appcompat-v7:26'
-    implementation 'androidx.appcompat:appcompat:1.6.0-alpha01'
+//    implementation 'androidx.appcompat:appcompat:1.6.0-alpha01'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation 'com.android.volley:volley:1.2.1'
     implementation 'com.android.support:support-annotations:28.0.0'
+     files('C:\\Users\\Nightwatcher\\Downloads\\ImageBase64Encoder.jar')
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'

@@ -1,6 +1,7 @@
 package com.example.hairme;
 
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +13,13 @@ import com.example.hairme.Fragments.HomeFragment;
 import com.example.hairme.Fragments.MyAppliction;
 import com.example.hairme.Fragments.NotificatinFragment;
 import com.example.hairme.Fragments.ProfileFragment;
+import com.example.hairme.Models.UserModle;
+import com.example.hairme.Services.SharedPrefmanager;
+import com.google.android.material.imageview.ShapeableImageView;
+import com.squareup.picasso.Picasso;
+
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class SandBox extends AppCompatActivity {
@@ -20,15 +28,15 @@ private MeowBottomNavigation meowBottomNavigation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN, android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_sand_box);
 
+
         meowBottomNavigation= findViewById(R.id.bottom_navigation);
-        meowBottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.ic_baseline_account_circle_24));
-        meowBottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.ic_baseline_account_circle_24));
-        meowBottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.ic_baseline_account_circle_24));
-        meowBottomNavigation.add(new MeowBottomNavigation.Model(4, R.drawable.ic_baseline_account_circle_24));
-        meowBottomNavigation.add(new MeowBottomNavigation.Model(5, R.drawable.ic_baseline_account_circle_24));
+        meowBottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.logout));
+        meowBottomNavigation.add(new MeowBottomNavigation.Model(2,R.drawable.applictios));
+        meowBottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.home));
+        meowBottomNavigation.add(new MeowBottomNavigation.Model(4, R.drawable.notifications_none_24));
+        meowBottomNavigation.add(new MeowBottomNavigation.Model(5, R.drawable.pin_24));
 
 
 
@@ -39,16 +47,21 @@ private MeowBottomNavigation meowBottomNavigation;
                 Fragment fragment ;
                 switch (item.getId()){
                     case  1:
-                       fragment =new ProfileFragment();
+                     //////////logout logic
+                        fragment = new HomeFragment();
                         break;
                     case 2:
-                        fragment =new NotificatinFragment();
+                        fragment = new MyAppliction();
                         break;
                     case 3:
                         fragment = new HomeFragment();
                         break;
                     case 4 :
-                        fragment = new MyAppliction();
+                        fragment =new NotificatinFragment();
+                        break;
+                    case 5:
+                        fragment =new ProfileFragment();
+
                         break;
                     default:
                         fragment = new HomeFragment();
@@ -58,7 +71,7 @@ private MeowBottomNavigation meowBottomNavigation;
 
         });
 
-        meowBottomNavigation.setCount(2 ,"10");
+        meowBottomNavigation.setCount(4 ,"10");
         meowBottomNavigation.show(3,true);
         meowBottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
             @Override

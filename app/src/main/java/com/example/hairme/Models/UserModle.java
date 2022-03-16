@@ -6,8 +6,10 @@ public class UserModle {
 
     @SerializedName("id")
     private int id;
-    @SerializedName("name")
-    private String username;
+    @SerializedName("f_name")
+private String f_name;
+    @SerializedName("l_name")
+    private String l_name;
     @SerializedName("phone")
     private String Phone_Number;
     @SerializedName("Email")
@@ -20,27 +22,9 @@ public class UserModle {
     private String photo;
     @SerializedName("profession")
     private String profession;
-    @SerializedName(" password")
-    private String password;
-    public UserModle(int id, String username, String phone_Number, String email, String adress, String gender, String photo,String profession,String password) {
-        this.id = id;
-        this.username = username;
-        this.Phone_Number = phone_Number;
-      this. Email = email;
-        this.adress = adress;
-        this.gender = gender;
-        this.photo = photo;
-        this.profession =profession;
-        this.password = password;
-    }
+    @SerializedName("education_level")
+    private String education_level;
 
-    public String getProfession() {
-        return profession;
-    }
-
-    public String getPassword() {
-        return password;
-    }
 
     public int getId() {
         return id;
@@ -50,12 +34,20 @@ public class UserModle {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getF_name() {
+        return f_name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setF_name(String f_name) {
+        this.f_name = f_name;
+    }
+
+    public String getL_name() {
+        return l_name;
+    }
+
+    public void setL_name(String l_name) {
+        this.l_name = l_name;
     }
 
     public String getPhone_Number() {
@@ -98,14 +90,32 @@ public class UserModle {
         this.photo = photo;
     }
 
-    public void setprofession(String profession){
+    public String getProfession() {
+        return profession;
+    }
+
+    public void setProfession(String profession) {
         this.profession = profession;
     }
 
-    public String getprofession()
-    {
-        return this.profession;
+    public String getEducation_level() {
+        return education_level;
     }
 
+    public void setEducation_level(String education_level) {
+        this.education_level = education_level;
+    }
 
+    public UserModle(int id, String f_name, String l_name, String phone_number, String email, String adress, String gender, String photo, String profession, String education_level) {
+        this.id = id;
+        this.f_name = f_name;
+        this.l_name = l_name;
+        Phone_Number = phone_number;
+        Email = email;
+        this.adress = adress;
+        this.gender = gender;
+        this.photo = photo;
+        this.profession = profession;
+        this.education_level = education_level;
+    }
 }

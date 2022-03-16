@@ -10,6 +10,8 @@ import com.google.gson.annotations.SerializedName;
 
 
 public class SharedPrefmanager {
+    private static SharedPrefmanager mInstance;
+    private static Context mCtx;
     private static SharedPreferences pref;
     private static  SharedPreferences.Editor editor;
     private static  Context _context;
@@ -17,14 +19,16 @@ public class SharedPrefmanager {
 
     private  static final String SHARED_PREF_NAME = "user-Data-Storg";
 
-    private static final String KEY_ID = "keyid";
-    private static final String KEY_NAME = "keyname";
+    private static final String  KEY_ID = "keyid";
+    private static final String KEY_l_name = "ke_l_yname";
+    private static final String KEY_f_name = "ke_f_yname";
     private static final String KEY_phone = "keyphone";
     private static final String KEY_EMAIL = "keyemail";
     private static final String KEY_adress = "key_adress";
     private static final String KEY_gender = "keygender";
     private static final String Key_photo = "keyphoto";
     private static final String KEY_profession = "KEY_profession";
+    private static final String KEY_education_level = "KEY_education_level";
     private static final String KEY_password = "KEY_password";
 
     // shared pref mode
@@ -37,6 +41,7 @@ public class SharedPrefmanager {
 
     public SharedPrefmanager(Context context) {
         this._context = context;
+        mCtx = context;
         pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = pref.edit();
     }
@@ -51,10 +56,13 @@ public class SharedPrefmanager {
     }
 
     public static synchronized SharedPrefmanager getInstance(Context context) {
-        if (pref == null) {
-            pref = (SharedPreferences) new SharedPrefmanager(context);
+        if (mInstance == null) {
+            mInstance = new SharedPrefmanager(context);
         }
-        return (SharedPrefmanager) pref;
+//        if (pref == null) {
+//            pref =  new SharedPrefmanager(context);
+//        }
+        return  mInstance;
     }
 
 
@@ -63,14 +71,15 @@ public class SharedPrefmanager {
         SharedPreferences sharedPreferences = _context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(KEY_ID, user.getId());
-        editor.putString(KEY_NAME, user.getUsername());
+        editor.putString(KEY_l_name, user.getF_name());
+        editor.putString(KEY_f_name, user.getL_name());
         editor.putString(KEY_EMAIL, user.getEmail());
         editor.putString(KEY_gender, user.getGender());
         editor.putString(KEY_phone, user.getPhone_Number());
         editor.putString(KEY_adress, user.getAdress());
         editor.putString(Key_photo, user.getPhoto());
-        editor.putString(KEY_profession, user.getprofession());
-        editor.putString(KEY_password, user.getPassword());
+        editor.putString(KEY_profession, user.getProfession());
+        editor.putString(KEY_education_level, user.getEducation_level());
         editor.apply();
 
 
@@ -80,7 +89,7 @@ public class SharedPrefmanager {
     //this method will checker whether user is already logged in or not
     public boolean isLoggedIn() {
         SharedPreferences sharedPreferences = _context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(KEY_NAME, null) != null;
+        return sharedPreferences.getString(KEY_EMAIL, null) != null;
     }
 
     //this method will give the logged in user
@@ -89,14 +98,15 @@ public class SharedPrefmanager {
 
         return new UserModle(
                 sharedPreferences.getInt(KEY_ID, -1),
-                sharedPreferences.getString(KEY_NAME, null),
+                sharedPreferences.getString(KEY_f_name, null),
+                sharedPreferences.getString(KEY_l_name, null),
                 sharedPreferences.getString(KEY_phone, null),
                 sharedPreferences.getString(KEY_EMAIL, null),
                 sharedPreferences.getString(KEY_adress, null),
                 sharedPreferences.getString(KEY_gender, null),
                 sharedPreferences.getString(Key_photo, null),
                 sharedPreferences.getString(KEY_profession, null),
-                sharedPreferences.getString(KEY_password, null)
+                sharedPreferences.getString(KEY_education_level, null)
 
 
         );

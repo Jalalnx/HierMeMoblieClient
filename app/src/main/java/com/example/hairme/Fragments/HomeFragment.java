@@ -7,8 +7,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.example.hairme.Models.UserModle;
 import com.example.hairme.R;
+import com.example.hairme.Services.SharedPrefmanager;
+import com.google.android.material.imageview.ShapeableImageView;
+import com.squareup.picasso.Picasso;
+
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,6 +26,10 @@ import com.example.hairme.R;
 
 //https://www.simplifiedcoding.net/upload-pdf-file-server-android/
 public class HomeFragment extends Fragment {
+
+
+    TextView Wellecomigng;
+    ShapeableImageView User;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,11 +72,29 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View root = inflater.inflate(R.layout.fragment_home, container, false);
+
+        Wellecomigng=root.findViewById(R.id.Wellecomigng);
+        User=root.findViewById(R.id.userImg);
+
+        UserModle user = SharedPrefmanager.getInstance(getActivity()).getUser();
+        Date dt = new Date(); int hours = dt.getHours(); int min = dt.getMinutes(); int am_pm = Calendar.AM_PM;
+        if(hours>=1 || hours<=3 && am_pm == Calendar.AM){
+            Wellecomigng.setText(user.getF_name()+"عمت مساء   ");
+        }else if(hours>=4 || hours<=12 && am_pm == Calendar.AM){
+            Wellecomigng.setText(user.getF_name()+"صباح الخير   ");
+        }else if(hours>=13 || hours<=17 && am_pm == Calendar.PM){
+            Wellecomigng.setText(user.getF_name()+"نهارك سعيد");
+        }else if(hours>=18 || hours<=20 && am_pm == Calendar.PM){
+            Wellecomigng.setText(user.getF_name()+"صباح الخير ");
+        }else if(hours>=21 || hours<=24 && am_pm == Calendar.PM) {
+            Wellecomigng.setText(user.getF_name()+"أحلام سعيده ");
+        }
+        Picasso.get().load(user.getPhoto()).fit().centerInside().into(User);
 
 
+return root;
     }
 }

@@ -170,6 +170,26 @@
                     android:background="@color/white"
                     android:inputType="textAutoComplete" />
 
+            </com.google.android.material.textfield.TextInputLayout><Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#000"
+                android:hint="المؤهل العلمي"
+                android:orientation="horizontal">
+
+                <AutoCompleteTextView
+                    android:id="@+id/education_level"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:inputType="textAutoComplete" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <Space
