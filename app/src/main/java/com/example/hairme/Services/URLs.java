@@ -6,7 +6,7 @@ public class URLs {
     public static final String URL_REGISTER = ROOT_URL + "register";
     public static final String URL_LOGIN= ROOT_URL + "login";
 
-    public static final String URL_List_Report= ROOT_URL + "Reports_retrieval.php";
+    public static final String URL_List_Jobs= ROOT_URL + "Jobs";
     public static final String URL_ChangPassword= ROOT_URL + "changPassword.php";
 
 

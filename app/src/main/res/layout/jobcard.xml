@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="20dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/in_imf"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="left"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="10dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/circleImageView"
+        tools:src="@tools:sample/avatars" />
+
+    <LinearLayout
+        android:background="#00000000"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:layoutDirection="rtl"
+        android:paddingEnd="80dp"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/des"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="عنوان الوظيفه "
+            android:drawableRight="@drawable/ic_baseline_shopping_bag_24"
+            android:fontFamily="@font/tajawal_medium"
+            android:textColor="@color/black"
+            android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/compny"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/tajawal_medium"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:drawableRight="@drawable/business_24"
+            android:text="الشركه"/>
+
+        <TextView
+            android:id="@+id/cat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/tajawal_medium"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:drawableRight="@drawable/category_24"
+            android:text="التصنيف"/>
+
+        <TextView
+            android:id="@+id/data"
+            android:drawableRight="@drawable/schedule_24"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/tajawal_medium"
+            android:layout_gravity="center"
+            android:text="زمن النشر"/>
+
+        <TextView
+            android:id="@+id/views"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/tajawal_medium"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+
+            android:text="المشاهدات "/>
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

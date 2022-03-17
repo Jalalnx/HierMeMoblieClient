@@ -38,5 +38,44 @@
     </LinearLayout>
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="40dp"
+        android:layout_margin="30dp"
+        android:orientation="vertical">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_marginTop="50dp"
+        background="@android:color/darker_gray"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/img_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:src="@drawable/feedback"
+            android:visibility="gone"
+            />
+
+        <TextView
+            android:id="@+id/text_feedbake"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:elevation="0dp"
+            android:textDirection="rtl"
+            android:textAlignment="center"
+            android:fontFamily="@font/tajawal_medium"
+            android:visibility="gone"
+            android:text="مشكله في ألاتصال بخادم تحقق خدمة البيانات او قم برجوع بمزود الخدمه"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
 
 </FrameLayout>
