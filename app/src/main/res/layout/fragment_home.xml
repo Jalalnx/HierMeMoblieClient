@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#4B9093"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.HomeFragment">
     <LinearLayout
@@ -21,7 +22,8 @@
             android:layout_marginStart="25dp"
             android:layout_marginTop="1dp"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
+            android:scrollbarStyle="insideOverlay"
+            android:scaleType="fitXY"
             app:shapeAppearanceOverlay="@style/circleImageView"
             tools:src="@tools:sample/avatars" />
 
@@ -32,8 +34,9 @@
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:elevation="0dp"
+            android:textColor="@color/white"
             android:fontFamily="@font/tajawal_medium"
-            android:text="000000"
+            android:text=""
             android:textSize="18sp" />
     </LinearLayout>
 
@@ -42,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="40dp"
-        android:layout_margin="30dp"
+
         android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView

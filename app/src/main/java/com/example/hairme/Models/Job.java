@@ -42,33 +42,10 @@ public class Job {
     private String status;
     @SerializedName("createdAt")
     private String createdAt ;
-    @SerializedName("institutes")
+    @SerializedName("institute")
     private institutes institutes;
     @SerializedName("views")
     private String views;
-
-    public Job(int id, String job_role, String salary_range, int years_of_experience, String vacancies, String employment_status, String employment_type, String education_level, String career_level, String gender, String industry, String contry, String city, String joo_description, String max_years_of_experience, String dead_line, String requirements, String status, String createdAt, com.example.hairme.Models.institutes institutes) {
-        this.id = id;
-        this.job_role = job_role;
-        this.salary_range = salary_range;
-        this.years_of_experience = years_of_experience;
-        this.vacancies = vacancies;
-        Employment_status = employment_status;
-        this.employment_type = employment_type;
-        this.education_level = education_level;
-        this.career_level = career_level;
-        Gender = gender;
-        this.industry = industry;
-        this.contry = contry;
-        this.city = city;
-        this.joo_description = joo_description;
-        this.max_years_of_experience = max_years_of_experience;
-        this.dead_line = dead_line;
-        this.requirements = requirements;
-        this.status = status;
-        this.createdAt = createdAt;
-        this.institutes = institutes;
-    }
 
     public int getId() {
         return id;
@@ -228,5 +205,37 @@ public class Job {
 
     public void setInstitutes(com.example.hairme.Models.institutes institutes) {
         this.institutes = institutes;
+    }
+
+    public String getViews() {
+        return views;
+    }
+
+    public void setViews(String views) {
+        this.views = views;
+    }
+
+    public Job(int id, String job_role, String salary_range, int years_of_experience, String vacancies, String employment_status, String employment_type, String education_level, String career_level, String gender, String industry, String contry, String city, String joo_description, String max_years_of_experience, String dead_line, String requirements, String status, String createdAt, com.example.hairme.Models.institutes institutes, String views) {
+        this.id = id;
+        this.job_role = job_role;
+        this.salary_range = salary_range;
+        this.years_of_experience = years_of_experience;
+        this.vacancies = vacancies;
+        Employment_status = employment_status;
+        this.employment_type = employment_type;
+        this.education_level = education_level;
+        this.career_level = career_level;
+        Gender = gender;
+        this.industry = industry;
+        this.contry = contry;
+        this.city = city;
+        this.joo_description = joo_description;
+        this.max_years_of_experience = max_years_of_experience;
+        this.dead_line = dead_line;
+        this.requirements = requirements;
+        this.status = status;
+        this.createdAt = createdAt;
+        this.institutes = institutes;
+        this.views = views;
     }
 }

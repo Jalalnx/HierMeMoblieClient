@@ -7,39 +7,43 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_I" />
     <uses-permission android:name=" MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/img"
-        android:usesCleartextTraffic="true"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.HairMe">
+        android:theme="@style/Theme.HairMe"
+        android:usesCleartextTraffic="true">
         <activity
-            android:name=".SandBox"
-            android:exported="true">
+            android:name=".Job_Details"
+            android:exported="true" >
 
         </activity>
         <activity
-            android:name=".singupActivity"
+            android:name=".SandBox"
             android:exported="true"/>
+        <activity
+            android:name=".singupActivity"
+            android:exported="true" />
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
             android:name=".SplashScreenActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="true">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".pre_loadActivity"
             android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"

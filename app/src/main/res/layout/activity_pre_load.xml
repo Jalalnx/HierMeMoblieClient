@@ -35,7 +35,7 @@
         android:layout_alignParentRight="true"
         android:background="@null"
         android:text="next"
-        android:textColor="#FF4081" />
+        android:textColor="#4B9093" />
 
    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_skip"
@@ -45,6 +45,6 @@
         android:layout_alignParentLeft="true"
         android:background="@null"
         android:text="skip"
-        android:textColor="#FF4081" />
+        android:textColor="#4B9093" />
 
 </RelativeLayout>

@@ -65,5 +65,8 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.kaopiz:kprogresshud:1.2.0'
 
+    // enables the project to use android upload service
+    implementation 'net.gotev:uploadservice:2.1'
+
 }
 //

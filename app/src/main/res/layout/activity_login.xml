@@ -11,7 +11,7 @@
 <View
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:background="#B87F9E"/>
+    android:background="#4B9093"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="100dp"

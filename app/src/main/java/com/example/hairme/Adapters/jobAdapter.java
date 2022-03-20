@@ -1,21 +1,29 @@
 package com.example.hairme.Adapters;
 
 import android.content.Context;
+import android.icu.text.SimpleDateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hairme.Models.Job;
+import com.example.hairme.Models.institutes;
 import com.example.hairme.R;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.squareup.picasso.Picasso;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 
 public class jobAdapter  extends RecyclerView.Adapter<jobAdapter.ExampleviewHolder> {
@@ -50,18 +58,46 @@ public class jobAdapter  extends RecyclerView.Adapter<jobAdapter.ExampleviewHold
 
     @Override
     public void onBindViewHolder(@NonNull ExampleviewHolder holder, int position) {
+         ///hoooks
+        Job currentItem=mExamplelist.get(position);
 
-//        Emg_Numbers_Modle currentItem=mExamplelist.get(position);
-//        String imageUrl=currentItem.getImageUrl();
-//        String depart_name=currentItem.getDeprment_name();
-//        int likecount=currentItem.getNumber();
-//
-//
-//        holder.mTextviewCreator.setText(depart_name);
-//        holder.mtextviewlikes.setText("Phone :"+likecount);
-//
-//        Picasso.with(mcontex).load(imageUrl).fit().centerInside().into(holder.mImageview);
+        String date=currentItem.getCreatedAt();
+        String job_role=currentItem.getJob_role();
+        String industry=currentItem.getIndustry();
+        String views=currentItem.getViews();
+        //get compeny detalis
+        institutes instanc   =currentItem.getInstitutes();
+        ///get logo
 
+        //get name
+        String name = instanc.getCompanyName();
+
+
+
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.getDefault());
+//        Date c = Calendar.getInstance().getTime();
+//        String formattedDate = df.format(c);
+//        String formattedDate2 = df.format(date);
+       ///set data
+        holder.des.setText(job_role);
+        holder.compny.setText(name);
+        holder.cat.setText(industry);
+        holder.data.setText(date);
+        holder.views.setText(views);
+
+
+
+
+
+
+        try {
+            String imag = instanc.getLogo();
+            Picasso.get().load(imag).fit().centerInside().into(holder.in_imag);
+        }catch (Exception e){
+            Toast.makeText(mcontex.getApplicationContext(), "Response:  " + instanc.toString(), Toast.LENGTH_SHORT).show();
+
+
+        }
     }
 
     @Override
@@ -75,6 +111,7 @@ public class jobAdapter  extends RecyclerView.Adapter<jobAdapter.ExampleviewHold
         public TextView cat;
         public TextView data;
         public TextView views;
+        public TextView compny;
 
         public ExampleviewHolder(@NonNull View itemView) {
             super(itemView);
@@ -83,6 +120,7 @@ public class jobAdapter  extends RecyclerView.Adapter<jobAdapter.ExampleviewHold
             cat=itemView.findViewById(R.id.cat);
             data=itemView.findViewById(R.id.data);
             views=itemView.findViewById(R.id.views);
+            compny=itemView.findViewById(R.id.compny);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

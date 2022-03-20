@@ -40,17 +40,20 @@
                 android:layout_width="160dp"
                 android:background="@drawable/round_btn"
                 android:layout_gravity="center"
+                android:scrollbarStyle="insideOverlay"
+                android:scaleType="fitXY"
                 app:cardCornerRadius="100dp"
             android:clickable="true"
             android:focusable="true"
             android:checkable="true">
                 <ImageView
                     android:id="@+id/takePhoto"
+                    android:scrollbarStyle="insideOverlay"
+                    android:scaleType="fitXY"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
 
-
-        </com.google.android.material.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>
 
 
 

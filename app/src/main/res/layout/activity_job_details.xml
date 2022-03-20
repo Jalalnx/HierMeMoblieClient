@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Job_Details">
+
+    <ImageView
+        android:id="@+id/wallpaper"
+        android:layout_width="414dp"
+        android:layout_height="155dp"
+        android:layout_marginTop="16dp"
+        android:fitsSystemWindows="true"
+        android:scaleType="fitXY"
+        android:contentDescription="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ImageContrastCheck"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageView5"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/wallpaper"
+        app:layout_constraintDimensionRatio="w,2:3"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/wallpaper"
+        app:layout_constraintVertical_bias="0.483"
+        app:shapeAppearanceOverlay="@style/circleImageView"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/job_role"
+        android:layout_width="wrap_content"
+        android:layout_height="23dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="job_role"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintTop_toBottomOf="@+id/wallpaper" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="0dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="377dp" />
+
+    <TextView
+        android:id="@+id/instituesName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/tajawal_medium"
+        android:text="الشركه:"
+        android:textDirection="rtl"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintTop_toBottomOf="@+id/job_role" />
+
+
+    <TextView
+        android:id="@+id/dead_line"
+        android:layout_width="149dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="@font/tajawal_medium"
+        android:text="اخر ميعاد لتقديم:"
+        android:textColor="@color/colorAccent"
+        android:textDirection="rtl"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollable"
+        app:layout_constraintEnd_toStartOf="@+id/UploadeAt"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:layout_constraintVertical_bias="0.357" />
+
+    <TextView
+        android:id="@+id/UploadeAt"
+        android:layout_width="151dp"
+        android:layout_height="29dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/tajawal_medium"
+        android:text="تاريخ النشر:"
+        android:textColor="@color/teal_700"
+        android:textDirection="rtl"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollable"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/job_role"
+        app:layout_constraintVertical_bias="0.578" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollable"
+        android:layout_width="357dp"
+        android:layout_height="367dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/instituesName"
+        app:layout_constraintVertical_bias="1.0">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="376dp"
+            android:layout_height="429dp"
+            android:checkable="true"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardCornerRadius="20dp">
+
+
+            <LinearLayout
+                android:layout_width="373dp"
+                android:layout_height="561dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:padding="30dp">
+
+                <TextView
+                    android:id="@+id/years_of_experience"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:elevation="0dp"
+                    android:fontFamily="@font/tajawal_medium"
+                    android:text="الخبره:"
+                    android:textDirection="rtl"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/contry_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:elevation="0dp"
+                    android:fontFamily="@font/tajawal_medium"
+                    android:text="المدينه:"
+                    android:textDirection="rtl"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/salary_range"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:elevation="0dp"
+                    android:fontFamily="@font/tajawal_medium"
+                    android:text="المرتب:"
+                    android:textDirection="rtl"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/vacancies"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:elevation="0dp"
+                    android:fontFamily="@font/tajawal_medium"
+                    android:text="الفرص المتاحه:"
+                    android:textDirection="rtl"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/Employment_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:elevation="0dp"
+                    android:fontFamily="@font/tajawal_medium"
+                    android:text="حالة العمل:"
+                    android:textDirection="rtl"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/employment_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:elevation="0dp"
+                    android:fontFamily="@font/tajawal_medium"
+                    android:text="طبيعة العمل:"
+                    android:textDirection="rtl"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/education_level"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:elevation="0dp"
+                    android:fontFamily="@font/tajawal_medium"
+                    android:text="المؤهل العلمي:"
+                    android:textDirection="rtl"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/career_level"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:elevation="0dp"
+                    android:fontFamily="@font/tajawal_medium"
+                    android:text="المستوي المهني:"
+                    android:textDirection="rtl"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/Gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:elevation="0dp"
+                    android:fontFamily="@font/tajawal_medium"
+                    android:text="الجنس المتاح:"
+                    android:textDirection="rtl"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/industry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:elevation="0dp"
+                    android:fontFamily="@font/tajawal_medium"
+                    android:text="مجال العمل:"
+                    android:textDirection="rtl"
+                    android:textSize="18sp" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:elevation="0dp"
+                    android:fontFamily="@font/tajawal_medium"
+                    android:text="وصف العمل / مسؤوليات:"
+                    android:textDirection="rtl"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/desdes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:elevation="0dp"
+                    android:fontFamily="@font/tajawal_medium"
+                    android:text="skljflksjdsl;kjfffffffgh"
+                    android:textDirection="rtl"
+                    android:textSize="18sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/pickFile"
+                    android:layout_width="190dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="50dp"
+                    android:text="تحميل"
+                    android:textColor="#B87F9E"
+                    android:fontFamily="@font/tajawal_medium"
+                    android:shadowColor="#B87F9E"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/inputcustom"
+                    tools:layout_editor_absoluteX="167dp"
+                    tools:layout_editor_absoluteY="272dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/Apply_job"
+                    android:layout_width="190dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="50dp"
+                    android:text="تقديم لعمل"
+                    android:textColor="#B87F9E"
+                    android:fontFamily="@font/tajawal_medium"
+                    android:shadowColor="#B87F9E"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/inputcustom"
+                    tools:layout_editor_absoluteX="167dp"
+                    tools:layout_editor_absoluteY="272dp" />
+            </LinearLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+    <ImageButton
+        android:id="@+id/BackBotton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/inputcustom"
+        app:layout_constraintBottom_toTopOf="@+id/wallpaper"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.041"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/wallpaper"
+        app:layout_constraintVertical_bias="0.516"
+        app:srcCompat="@drawable/arrow_back_24"
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
