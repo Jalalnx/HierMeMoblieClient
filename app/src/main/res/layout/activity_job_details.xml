@@ -11,12 +11,11 @@
         android:id="@+id/wallpaper"
         android:layout_width="414dp"
         android:layout_height="155dp"
-        android:layout_marginTop="16dp"
+        android:contentDescription="@null"
         android:fitsSystemWindows="true"
         android:scaleType="fitXY"
-        android:contentDescription="@null"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ImageContrastCheck"
@@ -58,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="0dp" />
+        app:layout_constraintGuide_begin="-19dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -93,13 +92,14 @@
 
     <TextView
         android:id="@+id/dead_line"
-        android:layout_width="149dp"
-        android:layout_height="26dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="15dp"
         android:fontFamily="@font/tajawal_medium"
         android:text="اخر ميعاد لتقديم:"
+        android:textAlignment="center"
         android:textColor="@color/colorAccent"
         android:textDirection="rtl"
         android:textSize="18sp"
@@ -112,14 +112,15 @@
 
     <TextView
         android:id="@+id/UploadeAt"
-        android:layout_width="151dp"
-        android:layout_height="29dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/tajawal_medium"
         android:text="تاريخ النشر:"
         android:textColor="@color/teal_700"
         android:textDirection="rtl"
+        android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/scrollable"
         app:layout_constraintEnd_toEndOf="parent"
@@ -325,19 +326,17 @@
 
     <ImageButton
         android:id="@+id/BackBotton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="55dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/inputcustom"
-        app:layout_constraintBottom_toTopOf="@+id/wallpaper"
+        app:layout_constraintBottom_toTopOf="@+id/imageView5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.041"
+        app:layout_constraintHorizontal_bias="0.033"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/wallpaper"
-        app:layout_constraintVertical_bias="0.516"
-        app:srcCompat="@drawable/arrow_back_24"
-        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/arrow_back_24" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

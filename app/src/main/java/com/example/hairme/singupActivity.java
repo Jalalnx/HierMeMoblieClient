@@ -107,32 +107,16 @@ public class singupActivity extends AppCompatActivity {
         selectedImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
         return Base64.encodeToString(imageBytes, Base64.DEFAULT);
-
-//        try {
-//            imageString =  ImageBase64.with(getApplicationContext())
-//                    .requestSize(128, 128) // default size
-//                    .encodeFile(path);
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-
-//        //decode base64 string to image
-//        imageBytes = Base64.decode(imageString, Base64.DEFAULT);
-//        Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-//        image.setImageBitmap(decodedImage);
-//        return null;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_singup);
-//        getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN, android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN, android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         // Making notification bar transparent
-        if (Build.VERSION.SDK_INT >= 21) {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        }
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         getPermission();
         f_name = findViewById(R.id.f_name);
         l_name = findViewById(R.id.l_name);

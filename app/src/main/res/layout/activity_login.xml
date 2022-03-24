@@ -70,7 +70,7 @@
             android:fontFamily="@font/tajawal_medium"
             android:shadowColor="#B87F9E"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/inputcustom"
+            android:background="@drawable/round_btn"
             android:src="@drawable/ic_baseline_arrow_forward_ios_24"
             />
 
