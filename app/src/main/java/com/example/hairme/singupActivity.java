@@ -73,8 +73,6 @@ public class singupActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int reqCode, int resultCode, Intent data) {
         super.onActivityResult(reqCode, resultCode, data);
-
-
         if (resultCode == RESULT_OK) {
             try {
                 final Uri imageUri = data.getData();
@@ -123,7 +121,9 @@ public class singupActivity extends AppCompatActivity {
         phone = findViewById(R.id.phon_namber);
         email = findViewById(R.id.email);
         Adress = findViewById(R.id.adress);
+//        profession = findViewById(R.id.IDTYPE);
         gender = findViewById(R.id.group);
+        rgestrion = findViewById(R.id.reg);
         rgestrion = findViewById(R.id.reg);
         passowrd = findViewById(R.id.password);
         userImgae = findViewById(R.id.takePhoto);
