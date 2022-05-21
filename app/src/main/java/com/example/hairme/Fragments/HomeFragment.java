@@ -124,19 +124,19 @@ public class HomeFragment extends Fragment implements jobAdapter.OnItemClickList
         Wellecomigng=root.findViewById(R.id.Wellecomigng);
         User=root.findViewById(R.id.userImg);
 
-        UserModle user = SharedPrefmanager.getInstance(getActivity()).getUser();
-        Date dt = new Date();
-        int hours = dt.getHours();
-        int min = dt.getMinutes();
-        int am_pm = Calendar.AM_PM;
-        if(hours>=1 || hours<=3 && am_pm == Calendar.AM){
-            Wellecomigng.setText(user.getF_name()+"عمت مساء   ");
-        }else if(hours>=4 || hours<=12 && am_pm == Calendar.AM){
-            Wellecomigng.setText(user.getF_name()+"صباح الخير   ");
-        }else if(hours>=13 || hours<=17 && am_pm == Calendar.PM){
-            Wellecomigng.setText(user.getF_name()+"نهارك سعيد");
-        }
-        Picasso.get().load(user.getPhoto()).fit().centerInside().into(User);
+//        UserModle user = SharedPrefmanager.getInstance(getActivity()).getUser();
+//        Date dt = new Date();
+//        int hours = dt.getHours();
+//        int min = dt.getMinutes();
+//        int am_pm = Calendar.AM_PM;
+//        if(hours>=1 || hours<=3 && am_pm == Calendar.AM){
+//            Wellecomigng.setText(user.getF_name()+"عمت مساء   ");
+//        }else if(hours>=4 || hours<=12 && am_pm == Calendar.AM){
+//            Wellecomigng.setText(user.getF_name()+"صباح الخير   ");
+//        }else if(hours>=13 || hours<=17 && am_pm == Calendar.PM){
+//            Wellecomigng.setText(user.getF_name()+"نهارك سعيد");
+//        }
+//        Picasso.get().load(user.getPhoto()).fit().centerInside().into(User);
         if (!isNetworkConnected(getActivity())) {
             Network_connectivety network_connectivety = new Network_connectivety(getActivity());
         root.findViewById(R.id.text_feedbake).setVisibility(View.VISIBLE);
@@ -187,7 +187,6 @@ public class HomeFragment extends Fragment implements jobAdapter.OnItemClickList
             ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo wifiConn = manager.getNetworkInfo(manager.TYPE_WIFI);
             NetworkInfo mobileConn = manager.getNetworkInfo(manager.TYPE_MOBILE);
-            ;
 
 
             if ((wifiConn != null && wifiConn.isConnected()) || (mobileConn != null && mobileConn.isConnected())) {
@@ -254,9 +253,6 @@ public class HomeFragment extends Fragment implements jobAdapter.OnItemClickList
                     Toast.makeText(getActivity(),
                             "ServerError!",
                             Toast.LENGTH_LONG).show();
-
-
-
                 } else if (error instanceof AuthFailureError) {
                     Toast.makeText(getContext(),
                             "AuthFailureError!",

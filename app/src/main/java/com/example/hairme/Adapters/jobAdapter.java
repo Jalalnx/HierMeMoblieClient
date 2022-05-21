@@ -1,11 +1,9 @@
 package com.example.hairme.Adapters;
 
 import android.content.Context;
-import android.icu.text.SimpleDateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,16 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hairme.Models.Job;
 import com.example.hairme.Models.institutes;
+import com.example.hairme.Models.notify;
 import com.example.hairme.R;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.squareup.picasso.Picasso;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 
 public class jobAdapter  extends RecyclerView.Adapter<jobAdapter.ExampleviewHolder> {
@@ -85,18 +79,11 @@ public class jobAdapter  extends RecyclerView.Adapter<jobAdapter.ExampleviewHold
         holder.data.setText(date);
         holder.views.setText(views);
 
-
-
-
-
-
         try {
             String imag = instanc.getLogo();
             Picasso.get().load(imag).fit().centerInside().into(holder.in_imag);
         }catch (Exception e){
             Toast.makeText(mcontex.getApplicationContext(), "Response:  " + instanc.toString(), Toast.LENGTH_SHORT).show();
-
-
         }
     }
 

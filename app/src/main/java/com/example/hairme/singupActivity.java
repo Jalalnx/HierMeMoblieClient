@@ -58,17 +58,17 @@ import java.util.Objects;
 
 public class singupActivity extends AppCompatActivity {
 
-    public static final String TAG = MainActivity.class.getSimpleName();
-    AppCompatImageButton Btn45, rgestrion;
+//    public static final String TAG = MainActivity.class.getSimpleName();
+    AppCompatImageButton  rgestrion;
     ImageView userImgae;
     android.widget.RadioGroup gender;
-    TextInputEditText f_name, l_name, phone, email, profession, Adress, passowrd;
-    int bitmap_size = 60;
-    public Uri mMediaUri,path;
-    private Bitmap bitmap, decoded;
+    TextInputEditText f_name, l_name, phone, email, Adress, passowrd;
+//    int bitmap_size = 60;
+    public Uri path;
+//    private Bitmap  decoded;
     public static final int REQUEST_TAKE_PHOTO = 1;
     public static final int WRITE_EXTERNAL_STORAGE = 123;
-    String imageString ;
+//    String imageString ;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onActivityResult(int reqCode, int resultCode, Intent data) {
@@ -179,7 +179,7 @@ public class singupActivity extends AppCompatActivity {
                     String textSelectedGorup = SelectedGender.getText().toString();
 
                     try {
-                        newAccount(textusername, textL_ame, textPhonenumber, profession,texteducation, textEmailemail, textAdress, textSelectedGorup, textPassword);
+                        newAccount(textusername, textL_ame, textPhonenumber, profession, texteducation, textEmailemail, textAdress, textSelectedGorup, textPassword);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -198,80 +198,6 @@ public class singupActivity extends AppCompatActivity {
 
 
     }
-
-
-    private Uri getOutputMediaFileUri() {
-        // check for external storage
-        if (true) {
-            // get the URI
-
-            // 1. Get the external storage directory
-            File mediaStorageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-
-            // 2. Create a unique file name
-            String fileName;
-            String fileType;
-            @SuppressLint("SimpleDateFormat") String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-
-            fileName = "IMG_" + timeStamp;
-            fileType = ".jpg";
-
-
-            // 3. Create the file
-            File mediaFile;
-            try {
-                mediaFile = File.createTempFile(fileName, fileType, mediaStorageDir);
-                Log.i(TAG, "File: " + Uri.fromFile(mediaFile));
-
-                // 4. Return the file's URI
-                return Uri.fromFile(mediaFile);
-            } catch (IOException e) {
-                Log.e(TAG, "Error creating file: " +
-                        mediaStorageDir.getAbsolutePath() + fileName + fileType);
-            }
-        } else {
-
-            final androidx.appcompat.app.AlertDialog.Builder dailog = new androidx.appcompat.app.AlertDialog.Builder(this)
-                    .setTitle("Storage")
-                    .setMessage("You don't have enough space in you device :(")
-                    .setCancelable(true);
-
-            dailog.show();
-            //   Toast.makeText(this,"You don't have enough space in you device :(",Toast.LENGTH_LONG).show();
-        }
-
-        // something went wrong
-        return null;
-    }
-
-    public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
-        Toast.makeText(this, "2", Toast.LENGTH_LONG).show();
-        int width = image.getWidth();
-        int height = image.getHeight();
-
-        float bitmapRatio = (float) width / (float) height;
-        if (bitmapRatio > 1) {
-            width = maxSize;
-            height = (int) (width / bitmapRatio);
-        } else {
-            height = maxSize;
-            width = (int) (height * bitmapRatio);
-        }
-        return Bitmap.createScaledBitmap(image, width, height, true);
-    }
-
-    private void setToImageView(Bitmap bmp) {
-        Toast.makeText(this, "3", Toast.LENGTH_LONG).show();
-
-        //compress image
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, bitmap_size, bytes);
-        decoded = BitmapFactory.decodeStream(new ByteArrayInputStream(bytes.toByteArray()));
-
-        //menampilkan gambar yang dipilih dari camera/gallery ke ImageView
-        userImgae.setImageBitmap(decoded);
-    }
-
 
     private void newAccount(String first_name, String Last_name, String Phone, String profession,String education, String email, String Adress, String gender, String Passcode) {
 
@@ -311,7 +237,7 @@ public class singupActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Response:  " + response.toString(), Toast.LENGTH_SHORT).show();
                     } else {
 
-//                        Toast.makeText(getApplicationContext(), "Response:  " + response.getJSONObject("Newuser"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Response:  " + response.getJSONObject("Newuser"), Toast.LENGTH_SHORT).show();
 //
 //                        JSONObject jsonArry = response.getJSONObject("Newuser");
 //                        Gson gson = new Gson();
@@ -369,9 +295,9 @@ public class singupActivity extends AppCompatActivity {
             }
         };
 
-        jsonOblect.setRetryPolicy(new com.android.volley.DefaultRetryPolicy
-                (30000, com.android.volley.DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                        com.android.volley.DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//        jsonOblect.setRetryPolicy(new com.android.volley.DefaultRetryPolicy
+//                (30000, com.android.volley.DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+//                        com.android.volley.DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         Mysingleton.getInstance(getApplicationContext()).addToReguestQueu(jsonOblect);
     }
 

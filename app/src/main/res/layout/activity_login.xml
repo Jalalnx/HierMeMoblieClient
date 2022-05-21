@@ -75,19 +75,15 @@
             />
 
 
-
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/rig"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="228dp"
+            android:layout_height="58dp"
             android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:background="#00000000"
-            android:elevation="0dp"
-            android:textSize="10dp"
+            android:background="@color/transparent"
             android:fontFamily="@font/tajawal_medium"
-            android:text="مستخدم جديد ؟ أنشاء حساب"
-            android:textColor="#B87F9E" />
+            android:backgroundTint="@color/purple_700"
+            android:text="مستخدم جديد ؟ أنشاء حساب" />
 
     </LinearLayout>
 

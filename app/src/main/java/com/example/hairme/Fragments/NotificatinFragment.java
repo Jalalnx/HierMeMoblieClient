@@ -1,14 +1,48 @@
 package com.example.hairme.Fragments;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.hairme.Adapters.jobAdapter;
+import com.example.hairme.Adapters.notifyAdapter;
+import com.example.hairme.Models.Job;
+import com.example.hairme.Models.UserModle;
+import com.example.hairme.Models.notify;
 import com.example.hairme.R;
+import com.example.hairme.Services.Mysingleton;
+import com.example.hairme.Services.SharedPrefmanager;
+import com.example.hairme.Services.URLs;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +50,11 @@ import com.example.hairme.R;
  * create an instance of this fragment.
  */
 public class NotificatinFragment extends Fragment {
+
+    RecyclerView JobRecyclerView;
+    private notifyAdapter JobAdapter;
+    private ArrayList<notify> notifyList;
+    private RequestQueue mRequestQueue;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +100,117 @@ public class NotificatinFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notificatin, container, false);
+        View root = inflater.inflate(R.layout.fragment_notificatin, container, false);
+
+        JobRecyclerView =root.findViewById(R.id.NotifyList);
+        JobRecyclerView.setHasFixedSize(true);
+        JobRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        notifyList = new ArrayList<notify>();
+
+        JobAdapter = new notifyAdapter(getContext(), notifyList);
+        JobRecyclerView.setAdapter(JobAdapter);
+        mRequestQueue = Volley.newRequestQueue(getContext());
+
+        parseJSON();
+        return root;
     }
+    private void parseJSON() {
+
+        UserModle user = SharedPrefmanager.getInstance(getActivity()).getUser();
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("userId", String.valueOf(user.getId()));
+//        params.put("userId", String.valueOf(1));
+
+
+        JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.GET, URLs.notifyUser , new JSONObject(params), new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+
+                try {
+                    if (response.getBoolean("error")) {
+                        ///replace tosat with dilog
+                        Toast.makeText(getActivity(), "Response:  " + response.toString(), Toast.LENGTH_SHORT).show();
+                    } else {
+
+                        //replace with jsonobject
+                        JSONArray array = response.getJSONArray("data");
+                        Gson gson = new Gson();
+                        for (int i = 0; i < array.length(); i++) {
+                            JSONObject object = array.getJSONObject(i);
+                            notify notify = gson.fromJson(object.toString(), notify.class);
+                            notifyList.add(notify);
+                        }
+                        JobAdapter.notifyDataSetChanged();
+
+//                        notifyAdapter.setOnItemClickListener(HomeFragment.this::onItemClick);
+                    }
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                if (error instanceof NetworkError) {
+                } else if (error instanceof ServerError) {
+                    Toast.makeText(getContext(),
+                            "ServerError!",
+                            Toast.LENGTH_LONG).show();
+                } else if (error instanceof AuthFailureError) {
+                    Toast.makeText(getContext(),
+                            "AuthFailureError!",
+                            Toast.LENGTH_LONG).show();
+                } else if (error instanceof ParseError) {
+                    Toast.makeText(getContext(),
+                            "ParseError!",
+                            Toast.LENGTH_LONG).show();
+                } else if (error instanceof NoConnectionError) {
+                    Toast.makeText(getContext(),
+                            "NoConnectionError!",
+                            Toast.LENGTH_LONG).show();
+                } else if (error instanceof TimeoutError) {
+                    Toast.makeText(getContext(),
+                            "Oops. Timeout error!",
+                            Toast.LENGTH_LONG).show();
+                }
+
+
+
+
+                final AlertDialog dailog = new AlertDialog.Builder(getContext())
+                        .setTitle("Oops Check you Internet connection")
+                        .setMessage(error.toString())
+                        .setPositiveButton("Reload", null)
+                        .setNegativeButton("Cancel", null)
+                        .show();
+                Button Retry = dailog.getButton(AlertDialog.BUTTON_POSITIVE);
+                Retry.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        parseJSON();
+                        dailog.dismiss();
+                    }
+                });
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                final Map<String, String> headers = new HashMap<>();
+                headers.put("Accept", "application/json" );//put your token here
+//                    headers.put("Content-Type", "application/json" );//put your token here
+                    headers.put("Connection", "keep-alive" );//put your token here
+                return headers;
+            }
+        };
+
+        jsonOblect.setRetryPolicy(new com.android.volley.DefaultRetryPolicy
+                (30000, com.android.volley.DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        com.android.volley.DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        Mysingleton.getInstance(getActivity()).addToReguestQueu(jsonOblect);
+    }
+
 }

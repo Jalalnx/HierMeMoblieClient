@@ -1,6 +1,8 @@
 package com.example.hairme;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatImageButton;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,13 +36,14 @@ import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 EditText username ,password;
-
+    AppCompatButton re;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         username =findViewById(R.id.name_Email);
         password =findViewById(R.id.password);
+        re =findViewById(R.id.rig);
 //
 //        if (!isNetworkConnected(com.example.b3l3g.login.this)) {
 //            Network_connectivety network_connectivety = new Network_connectivety(this);
@@ -53,9 +56,10 @@ EditText username ,password;
             finish();
             startActivity(new Intent(getApplicationContext(),SandBox.class));
         }
-        findViewById(R.id.rig).setOnClickListener(new View.OnClickListener() {
+        re.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                finish();
                 startActivity( new Intent(LoginActivity.this,singupActivity.class));
             }
         });
@@ -164,9 +168,9 @@ EditText username ,password;
             }
         };
 
-        jsonOblect.setRetryPolicy(new com.android.volley.DefaultRetryPolicy
-                (30000, com.android.volley.DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                        com.android.volley.DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//        jsonOblect.setRetryPolicy(new com.android.volley.DefaultRetryPolicy
+//                (30000, com.android.volley.DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+//                        com.android.volley.DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         Mysingleton.getInstance(getApplicationContext()).addToReguestQueu(jsonOblect);
     }
 }

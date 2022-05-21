@@ -97,7 +97,7 @@ public class SharedPrefmanager {
         SharedPreferences sharedPreferences = _context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
 
         return new UserModle(
-                sharedPreferences.getInt(KEY_ID, -1),
+                sharedPreferences.getInt(KEY_ID, 1),
                 sharedPreferences.getString(KEY_f_name, null),
                 sharedPreferences.getString(KEY_l_name, null),
                 sharedPreferences.getString(KEY_phone, null),
