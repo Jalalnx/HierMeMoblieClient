@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layoutDirection="ltr"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.ProfileFragment">
 
@@ -37,7 +38,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView"
             app:shapeAppearanceOverlay="@style/circleImageView"
-            tools:src="@tools:sample/avatars" />
+            android:background="@drawable/ic_baseline_account_circle_24" />
 
         <TextView
             android:id="@+id/profile_name"

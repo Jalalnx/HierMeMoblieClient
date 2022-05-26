@@ -9,14 +9,16 @@
 
     <ImageView
         android:id="@+id/wallpaper"
-        android:layout_width="414dp"
-        android:layout_height="155dp"
+        android:layout_width="336dp"
+        android:layout_height="143dp"
+        android:layout_margin="30dp"
+        android:layout_marginTop="28dp"
         android:contentDescription="@null"
         android:fitsSystemWindows="true"
         android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintHorizontal_bias="0.619"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ImageContrastCheck"
         tools:srcCompat="@tools:sample/avatars" />
@@ -31,10 +33,10 @@
         app:layout_constraintBottom_toBottomOf="@+id/wallpaper"
         app:layout_constraintDimensionRatio="w,2:3"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintHorizontal_bias="0.402"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/wallpaper"
-        app:layout_constraintVertical_bias="0.483"
+        app:layout_constraintVertical_bias="0.53"
         app:shapeAppearanceOverlay="@style/circleImageView"
         tools:srcCompat="@tools:sample/avatars" />
 
@@ -43,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="23dp"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:text="job_role"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -140,17 +142,18 @@
         app:layout_constraintVertical_bias="1.0">
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="376dp"
-            android:layout_height="429dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:checkable="true"
             android:clickable="true"
             android:focusable="true"
-            app:cardCornerRadius="20dp">
+            android:padding="20dp"
+            app:cardCornerRadius="30dp">
 
 
             <LinearLayout
                 android:layout_width="373dp"
-                android:layout_height="561dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:orientation="vertical"
                 android:padding="30dp">
@@ -287,20 +290,7 @@
                     android:textDirection="rtl"
                     android:textSize="18sp" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/pickFile"
-                    android:layout_width="190dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="50dp"
-                    android:text="تحميل"
-                    android:textColor="#B87F9E"
-                    android:fontFamily="@font/tajawal_medium"
-                    android:shadowColor="#B87F9E"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/inputcustom"
-                    tools:layout_editor_absoluteX="167dp"
-                    tools:layout_editor_absoluteY="272dp" />
+
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/Apply_job"
@@ -308,12 +298,15 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="50dp"
+                    android:paddingBottom="100dp"
                     android:text="تقديم لعمل"
-                    android:textColor="#B87F9E"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
                     android:fontFamily="@font/tajawal_medium"
                     android:shadowColor="#B87F9E"
                     android:layout_marginBottom="20dp"
-                    android:background="@drawable/inputcustom"
+                    android:background="@drawable/jobcartcustomshape"
                     tools:layout_editor_absoluteX="167dp"
                     tools:layout_editor_absoluteY="272dp" />
             </LinearLayout>

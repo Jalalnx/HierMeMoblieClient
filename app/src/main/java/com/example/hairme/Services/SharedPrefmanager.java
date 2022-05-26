@@ -118,12 +118,11 @@ public class SharedPrefmanager {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
-       /* Intent i = new Intent((), login.class);
+        Intent i = new Intent(_context, LoginActivity.class);
         // Closing all the Activities
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         // Add new Flag to start new Activity
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(i);*/
-        _context.startActivity(new Intent(_context, LoginActivity.class));
+        _context.startActivity(i);
     }
 }

@@ -48,9 +48,11 @@ import com.example.hairme.Services.URLs;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -121,35 +123,34 @@ public class HomeFragment extends Fragment implements jobAdapter.OnItemClickList
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-        Wellecomigng=root.findViewById(R.id.Wellecomigng);
-        User=root.findViewById(R.id.userImg);
+        Wellecomigng = root.findViewById(R.id.Wellecomigng);
+        User = root.findViewById(R.id.userImg);
 
-//        UserModle user = SharedPrefmanager.getInstance(getActivity()).getUser();
-//        Date dt = new Date();
-//        int hours = dt.getHours();
-//        int min = dt.getMinutes();
-//        int am_pm = Calendar.AM_PM;
-//        if(hours>=1 || hours<=3 && am_pm == Calendar.AM){
-//            Wellecomigng.setText(user.getF_name()+"عمت مساء   ");
-//        }else if(hours>=4 || hours<=12 && am_pm == Calendar.AM){
-//            Wellecomigng.setText(user.getF_name()+"صباح الخير   ");
-//        }else if(hours>=13 || hours<=17 && am_pm == Calendar.PM){
-//            Wellecomigng.setText(user.getF_name()+"نهارك سعيد");
-//        }
-//        Picasso.get().load(user.getPhoto()).fit().centerInside().into(User);
+        UserModle user = SharedPrefmanager.getInstance(getActivity()).getUser();
+        Date dt = new Date();
+        int hours = dt.getHours();
+        int min = dt.getMinutes();
+        int am_pm = Calendar.AM_PM;
+        if (hours >= 1 || hours <= 3 && am_pm == Calendar.AM) {
+            Wellecomigng.setText(user.getF_name() + "عمت مساء   ");
+        } else if (hours >= 4 || hours <= 12 && am_pm == Calendar.AM) {
+            Wellecomigng.setText(user.getF_name() + "صباح الخير   ");
+        } else if (hours >= 13 || hours <= 17 && am_pm == Calendar.PM) {
+            Wellecomigng.setText(user.getF_name() + "نهارك سعيد");
+        }
+        Picasso.get().load(user.getPhoto()).fit().centerInside().into(User);
         if (!isNetworkConnected(getActivity())) {
             Network_connectivety network_connectivety = new Network_connectivety(getActivity());
-        root.findViewById(R.id.text_feedbake).setVisibility(View.VISIBLE);
-        root.findViewById(R.id.img_feedback).setVisibility(View.VISIBLE);
-        root.findViewById(R.id.recyclerview).setVisibility(View.GONE);
-        }else
-        {
+            root.findViewById(R.id.text_feedbake).setVisibility(View.VISIBLE);
+            root.findViewById(R.id.img_feedback).setVisibility(View.VISIBLE);
+            root.findViewById(R.id.recyclerview).setVisibility(View.GONE);
+        } else {
             root.findViewById(R.id.text_feedbake).setVisibility(View.GONE);
             root.findViewById(R.id.img_feedback).setVisibility(View.GONE);
             root.findViewById(R.id.recyclerview).setVisibility(View.VISIBLE);
         }
 
-        JobRecyclerView =root.findViewById(R.id.recyclerview);
+        JobRecyclerView = root.findViewById(R.id.recyclerview);
         JobRecyclerView.setHasFixedSize(true);
         JobRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         JobList = new ArrayList<Job>();
@@ -166,7 +167,7 @@ public class HomeFragment extends Fragment implements jobAdapter.OnItemClickList
 
             }
         });
-      return root;
+        return root;
     }
 
     @Override
@@ -174,12 +175,11 @@ public class HomeFragment extends Fragment implements jobAdapter.OnItemClickList
         super.onViewCreated(view, savedInstanceState);
 
         if (!SharedPrefmanager.getInstance(getContext()).isLoggedIn()) {
-            startActivity(new Intent(getContext() , LoginActivity.class));
+            startActivity(new Intent(getContext(), LoginActivity.class));
         }
 
 
     }
-
 
 
     public boolean isNetworkConnected(Context context) {
@@ -215,7 +215,7 @@ public class HomeFragment extends Fragment implements jobAdapter.OnItemClickList
         params.put("page", "1");
 
 
-        JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.GET, URLs.URL_List_Jobs , new JSONObject(params), new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.GET, URLs.URL_List_Jobs, new JSONObject(params), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 prog.dismiss();
@@ -293,42 +293,39 @@ public class HomeFragment extends Fragment implements jobAdapter.OnItemClickList
             @Override
             public Map<String, String> getHeaders() {
                 final Map<String, String> headers = new HashMap<>();
-                headers.put("Accept", "application/json" );//put your token here
-//                    headers.put("Content-Type", "application/json" );//put your token here
-//                    headers.put("Connection", "keep-alive" );//put your token here
+                headers.put("Accept", "application/json");//put your token here
+                headers.put("Connection", "keep-alive");//put your token here
                 return headers;
             }
         };
 
-//        jsonOblect.setRetryPolicy(new com.android.volley.DefaultRetryPolicy
-//                (30000, com.android.volley.DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-//                        com.android.volley.DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         Mysingleton.getInstance(getActivity()).addToReguestQueu(jsonOblect);
     }
 
     @Override
     public void onItemClick(int postion) {
         Job clickedItem = JobList.get(postion);
-        institutes compny= clickedItem.getInstitutes();
+        institutes compny = clickedItem.getInstitutes();
         // creating a bundle instance
         Bundle bundle = new Bundle();
         bundle.putString("id", String.valueOf(clickedItem.getId()));
-        bundle.putString("wallpaper",compny.getPhoto());
-        bundle.putString("imageCompny",compny.getLogo());
-        bundle.putString("job_role",clickedItem.getJob_role());
-        bundle.putString("instituesName",compny.getCompanyName());
-        bundle.putString("UploadeAt",clickedItem.getCreatedAt());
-        bundle.putString("dead_line",clickedItem.getDead_line());
-        bundle.putString("years_of_experience",String.valueOf(clickedItem.getYears_of_experience()));
-        bundle.putString("contry_city",clickedItem.getContry()+"/"+clickedItem.getCity());
-        bundle.putString("salary_range",clickedItem.getSalary_range());
+        bundle.putString("wallpaper", compny.getPhoto());
+        bundle.putString("imageCompny", compny.getLogo());
+        bundle.putString("job_role", clickedItem.getJob_role());
+        bundle.putString("instituesName", compny.getCompanyName());
+        bundle.putString("instituesid", String.valueOf(compny.getId()));
+        bundle.putString("UploadeAt", clickedItem.getCreatedAt());
+        bundle.putString("dead_line", clickedItem.getDead_line());
+        bundle.putString("years_of_experience", String.valueOf(clickedItem.getYears_of_experience()));
+        bundle.putString("contry_city", clickedItem.getContry() + "/" + clickedItem.getCity());
+        bundle.putString("salary_range", clickedItem.getSalary_range());
         bundle.putString("vacancies", clickedItem.getVacancies());
         bundle.putString("Employment_status", clickedItem.getEmployment_status());
         bundle.putString("employment_type", clickedItem.getEmployment_type());
         bundle.putString("education_level", clickedItem.getEducation_level());
-        bundle.putString("career_level",clickedItem.getCareer_level());
+        bundle.putString("career_level", clickedItem.getCareer_level());
         bundle.putString("Gender", clickedItem.getGender());
-        bundle.putString("industry",clickedItem.getIndustry());
+        bundle.putString("industry", clickedItem.getIndustry());
         bundle.putString("joo_description", clickedItem.getJoo_description());
         Intent intent = new Intent(getActivity(), Job_Details.class);
         // passing the bundle to the intent

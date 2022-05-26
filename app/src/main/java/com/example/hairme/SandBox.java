@@ -48,25 +48,29 @@ private MeowBottomNavigation meowBottomNavigation;
                 switch (item.getId()){
                     case  1:
                      //////////logout logic
-                        fragment = new HomeFragment();
+                        SharedPrefmanager.getInstance(getApplicationContext()).logout();
                         break;
                     case 2:
                         fragment = new MyAppliction();
+                        replace(fragment);
                         break;
                     case 3:
                         fragment = new HomeFragment();
+                        replace(fragment);
                         break;
                     case 4 :
                         fragment =new NotificatinFragment();
+
+                        replace(fragment);
                         break;
                     case 5:
                         fragment =new ProfileFragment();
-
+                        replace(fragment);
                         break;
                     default:
                         fragment = new HomeFragment();
+                        replace(fragment);
                 }
-            replace(fragment);
             }
 
         });

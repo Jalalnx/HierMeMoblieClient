@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--suppress ALL -->
+<?xml version="1.0" encoding="utf-8"?><!--suppress ALL -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="#EB4B51"
     android:orientation="vertical"
     tools:context=".singupActivity">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -18,39 +17,30 @@
 
 
     <ScrollView
-        android:layout_width="411dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginLeft="1dp"
-        android:layout_marginBottom="47dp">
+       >
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="20dp"
+            android:layout_margin="40dp"
+            android:layout_marginBottom="40dp"
             android:orientation="vertical"
-            android:padding="50dp">
+            >
 
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/takePhoto"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="16dp"
-                android:adjustViewBounds="true"
                 android:layoutDirection="rtl"
                 android:overScrollMode="always"
                 android:scaleType="fitXY"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.394"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/circleImageView"
-                tools:src="@tools:sample/avatars" />
+                android:background="@drawable/ic_baseline_account_circle_24" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout3"
@@ -58,10 +48,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:layout_marginTop="50dp"
-                android:hint="الاسم الاول "
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/takePhoto">
+
+                android:hint="الاسم الاول ">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/l_name"
@@ -78,12 +66,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:layout_marginTop="16dp"
+
                 android:layout_marginBottom="8dp"
-                android:hint="الاسم الثاني "
-                app:layout_constraintBottom_toTopOf="@+id/textInputLayout4"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
+                android:hint="الاسم الثاني ">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/f_name"
@@ -99,14 +84,12 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:layout_marginTop="16dp"
+
                 android:hint="رقم الهاتف"
                 app:counterEnabled="true"
-                app:counterMaxLength="15"
-                app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout5">
+                app:counterMaxLength="15">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/phon_namber"
@@ -121,13 +104,11 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:layout_marginTop="32dp"
+
                 android:layout_marginBottom="16dp"
-                android:hint=" البريد الالكتروني .."
-                app:layout_constraintBottom_toTopOf="@+id/textInputLayout6"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
+                android:hint=" البريد الالكتروني ..">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/email"
@@ -143,11 +124,10 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:layout_marginTop="16dp"
-                android:hint=" العنوان الحالي  "
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
+
+                android:hint=" العنوان الحالي  ">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/adress"
@@ -163,13 +143,12 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:layout_marginTop="16dp"
+
                 android:backgroundTint="#000"
                 android:hint="المهنه"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout6">
+                android:orientation="horizontal">
 
                 <AutoCompleteTextView
                     android:id="@+id/IDTYPE"
@@ -187,14 +166,12 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:layout_marginTop="16dp"
+
                 android:backgroundTint="#000"
                 android:hint="المؤهل العلمي"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/textInputLayout8"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+                android:orientation="horizontal">
 
                 <AutoCompleteTextView
                     android:id="@+id/education_level"
@@ -215,9 +192,7 @@
                 android:layout_marginTop="24dp"
                 android:background="@drawable/inputcustom"
                 android:hint="كلمة السر"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout7"
+
                 app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -235,13 +210,10 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_marginTop="24dp"
+
                 android:contextClickable="true"
                 android:gravity="center"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/reg"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout8">
+                android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/male"
@@ -269,30 +241,11 @@
                 android:gravity="center"
                 android:src="@mipmap/img"
                 android:text="تسجيل"
+                android:layout_marginBottom="80dp"
                 android:textAlignment="center"
                 android:textColor="#B87F9E"
-                android:textSize="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/group"
-                app:layout_constraintVertical_bias="1.0" />
-
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="41dp"
-                android:layout_height="42dp"
-                app:layout_constraintBottom_toBottomOf="@+id/takePhoto"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.6"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/takePhoto"
-                app:layout_constraintVertical_bias="0.857"
-                app:srcCompat="@drawable/ic_baseline_camera_24" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:textSize="20dp" />
+        </LinearLayout>
     </ScrollView>
 
 

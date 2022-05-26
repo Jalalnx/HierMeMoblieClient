@@ -44,17 +44,10 @@ EditText username ,password;
         username =findViewById(R.id.name_Email);
         password =findViewById(R.id.password);
         re =findViewById(R.id.rig);
-//
-//        if (!isNetworkConnected(com.example.b3l3g.login.this)) {
-//            Network_connectivety network_connectivety = new Network_connectivety(this);
-//            findViewById(R.id.promet).setVisibility(View.VISIBLE);
-//        }else
-//        {
-//            findViewById(R.id.promet).setVisibility(View.INVISIBLE);
-//        }
+
         if(SharedPrefmanager.getInstance(getApplicationContext()).isLoggedIn()){
-            finish();
             startActivity(new Intent(getApplicationContext(),SandBox.class));
+            finish();
         }
         re.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,23 +147,19 @@ EditText username ,password;
                             Toast.LENGTH_LONG).show();
                 }
 
-//                Toast.makeText(getApplicationContext(), "Response:  " + error.getMessage(), Toast.LENGTH_SHORT).show();
-//                    onBackPressed();
+                Toast.makeText(getApplicationContext(), "Response:  " + error.getMessage(), Toast.LENGTH_SHORT).show();
+
             }
         }) {
             @Override
             public Map<String, String> getHeaders() {
                 final Map<String, String> headers = new HashMap<>();
                 headers.put("Accept", "application/json" );//put your token here
-//                    headers.put("Content-Type", "application/json" );//put your token here
-//                    headers.put("Connection", "keep-alive" );//put your token here
+                    headers.put("Connection", "keep-alive" );//put your token here
                 return headers;
             }
         };
 
-//        jsonOblect.setRetryPolicy(new com.android.volley.DefaultRetryPolicy
-//                (30000, com.android.volley.DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-//                        com.android.volley.DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         Mysingleton.getInstance(getApplicationContext()).addToReguestQueu(jsonOblect);
     }
 }

@@ -118,7 +118,7 @@ public class NotificatinFragment extends Fragment {
 
         UserModle user = SharedPrefmanager.getInstance(getActivity()).getUser();
         HashMap<String, String> params = new HashMap<String, String>();
-        params.put("userId", String.valueOf(user.getId()));
+        params.put("userId", "4");
 //        params.put("userId", String.valueOf(1));
 
 

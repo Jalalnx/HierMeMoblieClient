@@ -58,17 +58,17 @@ import java.util.Objects;
 
 public class singupActivity extends AppCompatActivity {
 
-//    public static final String TAG = MainActivity.class.getSimpleName();
-    AppCompatImageButton  rgestrion;
+    AppCompatImageButton rgestrion;
     ImageView userImgae;
     android.widget.RadioGroup gender;
     TextInputEditText f_name, l_name, phone, email, Adress, passowrd;
-//    int bitmap_size = 60;
+
     public Uri path;
-//    private Bitmap  decoded;
+    //    private Bitmap  decoded;
     public static final int REQUEST_TAKE_PHOTO = 1;
     public static final int WRITE_EXTERNAL_STORAGE = 123;
-//    String imageString ;
+
+    //    String imageString ;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onActivityResult(int reqCode, int resultCode, Intent data) {
@@ -76,7 +76,7 @@ public class singupActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             try {
                 final Uri imageUri = data.getData();
-                path =imageUri;
+                path = imageUri;
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                 userImgae.setImageBitmap(selectedImage);
@@ -86,10 +86,11 @@ public class singupActivity extends AppCompatActivity {
                 Toast.makeText(singupActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
             }
 
-        }else {
-            Toast.makeText(singupActivity.this, "You haven't picked Image",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(singupActivity.this, "You haven't picked Image", Toast.LENGTH_LONG).show();
         }
     }
+
     private void getPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
             return;
@@ -121,7 +122,6 @@ public class singupActivity extends AppCompatActivity {
         phone = findViewById(R.id.phon_namber);
         email = findViewById(R.id.email);
         Adress = findViewById(R.id.adress);
-//        profession = findViewById(R.id.IDTYPE);
         gender = findViewById(R.id.group);
         rgestrion = findViewById(R.id.reg);
         rgestrion = findViewById(R.id.reg);
@@ -199,7 +199,7 @@ public class singupActivity extends AppCompatActivity {
 
     }
 
-    private void newAccount(String first_name, String Last_name, String Phone, String profession,String education, String email, String Adress, String gender, String Passcode) {
+    private void newAccount(String first_name, String Last_name, String Phone, String profession, String education, String email, String Adress, String gender, String Passcode) {
 
         com.kaopiz.kprogresshud.KProgressHUD prog = com.kaopiz.kprogresshud.KProgressHUD.create(this)
                 .setStyle(com.kaopiz.kprogresshud.KProgressHUD.Style.SPIN_INDETERMINATE)
@@ -211,18 +211,18 @@ public class singupActivity extends AppCompatActivity {
                 .setSize(200, 200)
                 .show();
 
-                    HashMap<String, String> params = new HashMap<String, String>();
-                    params.put("f_name", first_name);
-                    params.put("l_name", Last_name);
-                    params.put("phone", Phone);
-                    params.put("Email", email);
-                    params.put("gender", gender);
-                    params.put("adress", Adress);
-                    params.put("profession", profession);
-                    params.put("education_level", education);
-                    params.put("password", Passcode);
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("f_name", first_name);
+        params.put("l_name", Last_name);
+        params.put("phone", Phone);
+        params.put("Email", email);
+        params.put("gender", gender);
+        params.put("adress", Adress);
+        params.put("profession", profession);
+        params.put("education_level", education);
+        params.put("password", Passcode);
         try {
-            params.put("photo", "data:image/webp;base64,"+encode(path));
+            params.put("photo", "data:image/webp;base64," + encode(path));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -238,12 +238,7 @@ public class singupActivity extends AppCompatActivity {
                     } else {
 
                         Toast.makeText(getApplicationContext(), "Response:  " + response.getJSONObject("Newuser"), Toast.LENGTH_SHORT).show();
-//
-//                        JSONObject jsonArry = response.getJSONObject("Newuser");
-//                        Gson gson = new Gson();
-//                        UserModle userModle = gson.fromJson(jsonArry.toString(), UserModle.class);
-//                        //storing the user in shared preferences
-//                        SharedPrefmanager.getInstance(getApplicationContext()).userLogin(userModle);
+
                         Intent intent = new Intent(singupActivity.this, LoginActivity.class);
                         startActivity(intent);
 
@@ -260,7 +255,7 @@ public class singupActivity extends AppCompatActivity {
                 if (error instanceof NetworkError) {
                 } else if (error instanceof ServerError) {
                     Toast.makeText(getApplicationContext(),
-                            "ServerError!",
+                            "ServerError!" + error,
                             Toast.LENGTH_LONG).show();
 
                 } else if (error instanceof AuthFailureError) {
@@ -288,16 +283,12 @@ public class singupActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() {
                 final Map<String, String> headers = new HashMap<>();
-                    headers.put("Accept", "application/json" );//put your token here
-//                    headers.put("Content-Type", "application/json" );//put your token here
-//                    headers.put("Connection", "keep-alive" );//put your token here
+                headers.put("Content-Type", "application/json");//put your token here
+                headers.put("Connection", "keep-alive");//put your token here
                 return headers;
             }
         };
 
-//        jsonOblect.setRetryPolicy(new com.android.volley.DefaultRetryPolicy
-//                (30000, com.android.volley.DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-//                        com.android.volley.DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         Mysingleton.getInstance(getApplicationContext()).addToReguestQueu(jsonOblect);
     }
 
