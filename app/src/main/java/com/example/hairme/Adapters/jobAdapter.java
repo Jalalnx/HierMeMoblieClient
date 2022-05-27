@@ -14,6 +14,7 @@ import com.example.hairme.Models.Job;
 import com.example.hairme.Models.institutes;
 import com.example.hairme.Models.notify;
 import com.example.hairme.R;
+import com.example.hairme.Services.TimeAgo2;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.squareup.picasso.Picasso;
 
@@ -68,15 +69,17 @@ public class jobAdapter  extends RecyclerView.Adapter<jobAdapter.ExampleviewHold
 
 
 
-//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.getDefault());
-//        Date c = Calendar.getInstance().getTime();
-//        String formattedDate = df.format(c);
-//        String formattedDate2 = df.format(date);
-       ///set data
         holder.des.setText(job_role);
         holder.compny.setText(name);
         holder.cat.setText(industry);
-        holder.data.setText(date);
+
+
+        String time = date;
+        TimeAgo2 timeAgo2 = new TimeAgo2();
+        String MyFinalValue = timeAgo2.covertTimeToText(time);
+        holder.data.setText(MyFinalValue);
+
+
         holder.views.setText(views);
 
         try {

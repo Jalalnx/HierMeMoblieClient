@@ -100,7 +100,7 @@ EditText username ,password;
                 try {
                     if (response.getBoolean("error")) {
                         ///replace tosat with dilog
-                        Toast.makeText(getApplicationContext(), "Response:  " + response.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), response.getString("message"), Toast.LENGTH_SHORT).show();
                     } else {
 
                         Toast.makeText(getApplicationContext(), "Response:  " + response.getJSONObject("user"), Toast.LENGTH_SHORT).show();
@@ -154,8 +154,8 @@ EditText username ,password;
             @Override
             public Map<String, String> getHeaders() {
                 final Map<String, String> headers = new HashMap<>();
-                headers.put("Accept", "application/json" );//put your token here
-                    headers.put("Connection", "keep-alive" );//put your token here
+//                headers.put("Accept", "application/json" );//put your token here
+//                    headers.put("Connection", "keep-alive" );//put your token here
                 return headers;
             }
         };

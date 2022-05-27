@@ -40,6 +40,7 @@ import com.example.hairme.Services.FilePath;
 import com.example.hairme.Services.Mysingleton;
 import com.example.hairme.Services.SharedPrefmanager;
 import com.example.hairme.Services.SingleUploadBroadcastReceiver;
+import com.example.hairme.Services.TimeAgo2;
 import com.example.hairme.Services.URLs;
 import com.example.hairme.Services.VolleyMultipartRequest;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -122,8 +123,24 @@ public class Job_Details extends AppCompatActivity{
 
         roal.setText(bundle.getString("job_role", "غير محدد "));
         com_name.setText(bundle.getString("instituesName", "غير محدد "));
-        UploadeAt.setText(bundle.getString("UploadeAt", "غير محدد   :"));
-        dead_line.setText(bundle.getString("dead_line", "غير محدد  :"));
+
+
+        //get time since job inserted
+        String time2 = bundle.getString("createdAt", "غير محدد   :");
+        TimeAgo2 timeAgo = new TimeAgo2();
+        String createdAt = timeAgo.covertTimeToText(time2);
+        UploadeAt.setText(  createdAt );
+
+
+
+        //get data of closing
+        String time = bundle.getString("dead_line", "غير محدد  :");
+        TimeAgo2 timeAgo2 = new TimeAgo2();
+        String MyFinalValue = timeAgo2.covertTimeToAfter(time);
+        dead_line.setText( MyFinalValue);
+
+
+
         years_of_experience.setText(new StringBuilder().append(" سنين الخبره  :   ").append(bundle.getString("years_of_experience", "غير محدد")).toString());
         contry_city.setText(new StringBuilder().append(" الموقع  : ").append(bundle.getString("contry_city", "غير محدد")).toString());
         salary_range.setText(new StringBuilder().append("متوسط المرتب   :  ").append(bundle.getString("salary_range", "غير محدد")).toString());
@@ -165,7 +182,7 @@ public class Job_Details extends AppCompatActivity{
     public void onBackPressed() {
         new AlertDialog.Builder(this)
                 .setTitle("Really Exit?")
-                .setMessage("Are you sure you want to exit?")
+                .setMessage("هل انت متأكد في رغبتك في الخروج ؟")
                 .setNegativeButton(android.R.string.no, null)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
@@ -189,7 +206,7 @@ public class Job_Details extends AppCompatActivity{
                 .show();
 
                 HashMap<String, String> params = new HashMap<String, String>();
-                params.put("userId", "1");
+                params.put("userId", user);
                 params.put("jobId", job_id);
                 params.put("instituteId", compny);
 

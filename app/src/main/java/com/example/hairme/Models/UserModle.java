@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class UserModle {
 
     @SerializedName("id")
-    private int id;
+    private String id;
     @SerializedName("f_name")
 private String f_name;
     @SerializedName("l_name")
@@ -26,11 +26,11 @@ private String f_name;
     private String education_level;
 
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(int String) {
         this.id = id;
     }
 
@@ -106,7 +106,7 @@ private String f_name;
         this.education_level = education_level;
     }
 
-    public UserModle(int id, String f_name, String l_name, String phone_number, String email, String adress, String gender, String photo, String profession, String education_level) {
+    public UserModle(String id, String f_name, String l_name, String phone_number, String email, String adress, String gender, String photo, String profession, String education_level) {
         this.id = id;
         this.f_name = f_name;
         this.l_name = l_name;

@@ -7,6 +7,7 @@ public class URLs {
     public static final String URL_LOGIN= ROOT_URL + "login";
     public static final String URL_List_Jobs= ROOT_URL + "Jobs";
     public static final String URL_Applay= ROOT_URL + "apply";
+    public static final String URL_app= ROOT_URL + "app";
     public static final String notifyUser= ROOT_URL + "notifyUser";
 
 

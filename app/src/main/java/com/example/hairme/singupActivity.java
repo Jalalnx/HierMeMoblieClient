@@ -29,11 +29,13 @@ import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.hairme.Models.UserModle;
 import com.example.hairme.Services.Mysingleton;
 import com.example.hairme.Services.SharedPrefmanager;
@@ -63,6 +65,7 @@ public class singupActivity extends AppCompatActivity {
     android.widget.RadioGroup gender;
     TextInputEditText f_name, l_name, phone, email, Adress, passowrd;
 
+    private RequestQueue mRequestQueue;
     public Uri path;
     //    private Bitmap  decoded;
     public static final int REQUEST_TAKE_PHOTO = 1;
@@ -117,6 +120,9 @@ public class singupActivity extends AppCompatActivity {
         // Making notification bar transparent
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         getPermission();
+
+
+        mRequestQueue = Volley.newRequestQueue(singupActivity.this);
         f_name = findViewById(R.id.f_name);
         l_name = findViewById(R.id.l_name);
         phone = findViewById(R.id.phon_namber);
@@ -212,8 +218,8 @@ public class singupActivity extends AppCompatActivity {
                 .show();
 
         HashMap<String, String> params = new HashMap<String, String>();
-        params.put("f_name", first_name);
-        params.put("l_name", Last_name);
+        params.put("f_name", Last_name);
+        params.put("l_name", first_name);
         params.put("phone", Phone);
         params.put("Email", email);
         params.put("gender", gender);
@@ -276,8 +282,8 @@ public class singupActivity extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
                 }
 
-//                Toast.makeText(getApplicationContext(), "Response:  " + error.getMessage(), Toast.LENGTH_SHORT).show();
-//                    onBackPressed();
+                Toast.makeText(getApplicationContext(), "Response:  " + error.getMessage(), Toast.LENGTH_SHORT).show();
+
             }
         }) {
             @Override
@@ -289,7 +295,8 @@ public class singupActivity extends AppCompatActivity {
             }
         };
 
-        Mysingleton.getInstance(getApplicationContext()).addToReguestQueu(jsonOblect);
+                mRequestQueue.add(jsonOblect);
+//        Mysingleton.getInstance(getApplicationContext()).addToReguestQueu(jsonOblect);
     }
 
 }

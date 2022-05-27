@@ -137,6 +137,8 @@ public class HomeFragment extends Fragment implements jobAdapter.OnItemClickList
             Wellecomigng.setText(user.getF_name() + "صباح الخير   ");
         } else if (hours >= 13 || hours <= 17 && am_pm == Calendar.PM) {
             Wellecomigng.setText(user.getF_name() + "نهارك سعيد");
+        } else if (hours >= 18 || hours <= 24 && am_pm == Calendar.PM) {
+            Wellecomigng.setText(user.getF_name() + " ليله سعيده");
         }
         Picasso.get().load(user.getPhoto()).fit().centerInside().into(User);
         if (!isNetworkConnected(getActivity())) {
@@ -224,6 +226,7 @@ public class HomeFragment extends Fragment implements jobAdapter.OnItemClickList
                     if (response.getBoolean("error")) {
                         ///replace tosat with dilog
                         Toast.makeText(getActivity(), "Response:  " + response.toString(), Toast.LENGTH_SHORT).show();
+
                     } else {
 
                         //replace with jsonobject
@@ -233,6 +236,8 @@ public class HomeFragment extends Fragment implements jobAdapter.OnItemClickList
                             JSONObject object = array.getJSONObject(i);
                             Job job = gson.fromJson(object.toString(), Job.class);
                             JobList.add(job);
+
+
                         }
                         JobAdapter.notifyDataSetChanged();
                         prog.dismiss();
@@ -242,64 +247,68 @@ public class HomeFragment extends Fragment implements jobAdapter.OnItemClickList
                 } catch (JSONException e) {
                     prog.dismiss();
                     e.printStackTrace();
+
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 prog.dismiss();
-                if (error instanceof NetworkError) {
-                } else if (error instanceof ServerError) {
-                    Toast.makeText(getActivity(),
-                            "ServerError!",
-                            Toast.LENGTH_LONG).show();
-                } else if (error instanceof AuthFailureError) {
-                    Toast.makeText(getContext(),
-                            "AuthFailureError!",
-                            Toast.LENGTH_LONG).show();
-                } else if (error instanceof ParseError) {
-                    Toast.makeText(getActivity(),
-                            "ParseError!",
-                            Toast.LENGTH_LONG).show();
-                } else if (error instanceof NoConnectionError) {
-                    Toast.makeText(getActivity(),
-                            "NoConnectionError!",
-                            Toast.LENGTH_LONG).show();
-                } else if (error instanceof TimeoutError) {
-                    Toast.makeText(getActivity(),
-                            "Oops. Timeout error!",
-                            Toast.LENGTH_LONG).show();
-                }
-
-
-                prog.dismiss();
-
-                final AlertDialog dailog = new AlertDialog.Builder(getContext())
-                        .setTitle("Oops Check you Internet connection")
-                        .setMessage(error.toString())
-                        .setPositiveButton("Reload", null)
-                        .setNegativeButton("Cancel", null)
-                        .show();
-                Button Retry = dailog.getButton(AlertDialog.BUTTON_POSITIVE);
-                Retry.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        parseJSON();
-                        dailog.dismiss();
+                if (getActivity() != null) {
+                    if (error instanceof NetworkError) {
+                    } else if (error instanceof ServerError) {
+                        Toast.makeText(getActivity(),
+                                "ServerError!",
+                                Toast.LENGTH_LONG).show();
+                    } else if (error instanceof AuthFailureError) {
+                        Toast.makeText(getContext(),
+                                "AuthFailureError!",
+                                Toast.LENGTH_LONG).show();
+                    } else if (error instanceof ParseError) {
+                        Toast.makeText(getActivity(),
+                                "ParseError!",
+                                Toast.LENGTH_LONG).show();
+                    } else if (error instanceof NoConnectionError) {
+                        Toast.makeText(getActivity(),
+                                "NoConnectionError!",
+                                Toast.LENGTH_LONG).show();
+                    } else if (error instanceof TimeoutError) {
+                        Toast.makeText(getActivity(),
+                                "Oops. Timeout error!",
+                                Toast.LENGTH_LONG).show();
                     }
-                });
+
+
+                    prog.dismiss();
+
+                    final AlertDialog dailog = new AlertDialog.Builder(getContext())
+                            .setTitle("Oops Check you Internet connection")
+                            .setMessage(error.toString())
+                            .setPositiveButton("Reload", null)
+                            .setNegativeButton("Cancel", null)
+                            .show();
+                    Button Retry = dailog.getButton(AlertDialog.BUTTON_POSITIVE);
+                    Retry.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            parseJSON();
+                            dailog.dismiss();
+                        }
+                    });
+                }
             }
         }) {
             @Override
             public Map<String, String> getHeaders() {
                 final Map<String, String> headers = new HashMap<>();
-                headers.put("Accept", "application/json");//put your token here
-                headers.put("Connection", "keep-alive");//put your token here
+//                headers.put("Accept", "application/json");//put your token here
+//                headers.put("Connection", "keep-alive");//put your token here
                 return headers;
             }
         };
 
         Mysingleton.getInstance(getActivity()).addToReguestQueu(jsonOblect);
+
     }
 
     @Override
@@ -314,7 +323,7 @@ public class HomeFragment extends Fragment implements jobAdapter.OnItemClickList
         bundle.putString("job_role", clickedItem.getJob_role());
         bundle.putString("instituesName", compny.getCompanyName());
         bundle.putString("instituesid", String.valueOf(compny.getId()));
-        bundle.putString("UploadeAt", clickedItem.getCreatedAt());
+        bundle.putString("createdAt", clickedItem.getCreatedAt());
         bundle.putString("dead_line", clickedItem.getDead_line());
         bundle.putString("years_of_experience", String.valueOf(clickedItem.getYears_of_experience()));
         bundle.putString("contry_city", clickedItem.getContry() + "/" + clickedItem.getCity());

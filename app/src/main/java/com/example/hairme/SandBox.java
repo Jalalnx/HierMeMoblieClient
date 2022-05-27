@@ -1,6 +1,10 @@
 package com.example.hairme;
 
+import android.app.AlertDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -8,18 +12,38 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.hairme.Fragments.HomeFragment;
 import com.example.hairme.Fragments.MyAppliction;
 import com.example.hairme.Fragments.NotificatinFragment;
 import com.example.hairme.Fragments.ProfileFragment;
 import com.example.hairme.Models.UserModle;
+import com.example.hairme.Models.notify;
+import com.example.hairme.Services.Mysingleton;
 import com.example.hairme.Services.SharedPrefmanager;
+import com.example.hairme.Services.URLs;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class SandBox extends AppCompatActivity {
@@ -75,7 +99,7 @@ private MeowBottomNavigation meowBottomNavigation;
 
         });
 
-        meowBottomNavigation.setCount(4 ,"10");
+//        meowBottomNavigation.setCount(4 ,"10");
         meowBottomNavigation.show(3,true);
         meowBottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
             @Override
@@ -97,4 +121,7 @@ private MeowBottomNavigation meowBottomNavigation;
     private void replace(Fragment Fragment) {
        getSupportFragmentManager().beginTransaction().replace(R.id.Sandbox,Fragment).commit();
     }
+
+
+
 }

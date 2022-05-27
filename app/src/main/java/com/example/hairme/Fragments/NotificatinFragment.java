@@ -118,11 +118,10 @@ public class NotificatinFragment extends Fragment {
 
         UserModle user = SharedPrefmanager.getInstance(getActivity()).getUser();
         HashMap<String, String> params = new HashMap<String, String>();
-        params.put("userId", "4");
-//        params.put("userId", String.valueOf(1));
+        params.put("userId", user.getId());
 
 
-        JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.GET, URLs.notifyUser , new JSONObject(params), new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, URLs.notifyUser , new JSONObject(params), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
@@ -154,55 +153,52 @@ public class NotificatinFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
-                if (error instanceof NetworkError) {
-                } else if (error instanceof ServerError) {
-                    Toast.makeText(getContext(),
-                            "ServerError!",
-                            Toast.LENGTH_LONG).show();
-                } else if (error instanceof AuthFailureError) {
-                    Toast.makeText(getContext(),
-                            "AuthFailureError!",
-                            Toast.LENGTH_LONG).show();
-                } else if (error instanceof ParseError) {
-                    Toast.makeText(getContext(),
-                            "ParseError!",
-                            Toast.LENGTH_LONG).show();
-                } else if (error instanceof NoConnectionError) {
-                    Toast.makeText(getContext(),
-                            "NoConnectionError!",
-                            Toast.LENGTH_LONG).show();
-                } else if (error instanceof TimeoutError) {
-                    Toast.makeText(getContext(),
-                            "Oops. Timeout error!",
-                            Toast.LENGTH_LONG).show();
-                }
-
-
-
-
-                final AlertDialog dailog = new AlertDialog.Builder(getContext())
-                        .setTitle("Oops Check you Internet connection")
-                        .setMessage(error.toString())
-                        .setPositiveButton("Reload", null)
-                        .setNegativeButton("Cancel", null)
-                        .show();
-                Button Retry = dailog.getButton(AlertDialog.BUTTON_POSITIVE);
-                Retry.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        parseJSON();
-                        dailog.dismiss();
+                if (getActivity() != null) {
+                    if (error instanceof NetworkError) {
+                    } else if (error instanceof ServerError) {
+                        Toast.makeText(getActivity(),
+                                "ServerError!",
+                                Toast.LENGTH_LONG).show();
+                    } else if (error instanceof AuthFailureError) {
+                        Toast.makeText(getActivity(),
+                                "AuthFailureError!",
+                                Toast.LENGTH_LONG).show();
+                    } else if (error instanceof ParseError) {
+                        Toast.makeText(getActivity(),
+                                "ParseError!",
+                                Toast.LENGTH_LONG).show();
+                    } else if (error instanceof NoConnectionError) {
+                        Toast.makeText(getContext(),
+                                "NoConnectionError!",
+                                Toast.LENGTH_LONG).show();
+                    } else if (error instanceof TimeoutError) {
+                        Toast.makeText(getActivity(),
+                                "Oops. Timeout error!",
+                                Toast.LENGTH_LONG).show();
                     }
-                });
+
+
+                    final AlertDialog dailog = new AlertDialog.Builder(getContext())
+                            .setTitle("Oops Check you Internet connection")
+                            .setMessage(error.toString())
+                            .setPositiveButton("Reload", null)
+                            .setNegativeButton("Cancel", null)
+                            .show();
+                    Button Retry = dailog.getButton(AlertDialog.BUTTON_POSITIVE);
+                    Retry.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            parseJSON();
+                            dailog.dismiss();
+                        }
+                    });
+                }
             }
         }) {
             @Override
             public Map<String, String> getHeaders() {
                 final Map<String, String> headers = new HashMap<>();
-                headers.put("Accept", "application/json" );//put your token here
-//                    headers.put("Content-Type", "application/json" );//put your token here
-                    headers.put("Connection", "keep-alive" );//put your token here
+                headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
         };

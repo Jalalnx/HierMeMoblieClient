@@ -70,7 +70,7 @@ public class SharedPrefmanager {
     public void userLogin(UserModle user) {
         SharedPreferences sharedPreferences = _context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(KEY_ID, user.getId());
+        editor.putString(KEY_ID, user.getId());
         editor.putString(KEY_l_name, user.getF_name());
         editor.putString(KEY_f_name, user.getL_name());
         editor.putString(KEY_EMAIL, user.getEmail());
@@ -97,7 +97,7 @@ public class SharedPrefmanager {
         SharedPreferences sharedPreferences = _context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
 
         return new UserModle(
-                sharedPreferences.getInt(KEY_ID, 1),
+                sharedPreferences.getString(KEY_ID, null),
                 sharedPreferences.getString(KEY_f_name, null),
                 sharedPreferences.getString(KEY_l_name, null),
                 sharedPreferences.getString(KEY_phone, null),

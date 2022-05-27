@@ -12,10 +12,14 @@
         android:layout_width="336dp"
         android:layout_height="143dp"
         android:layout_margin="30dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="28dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="5dp"
         android:contentDescription="@null"
         android:fitsSystemWindows="true"
         android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/job_role"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintHorizontal_bias="0.619"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -25,18 +29,18 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageView5"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="103dp"
+        android:layout_height="92dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="@+id/wallpaper"
         app:layout_constraintDimensionRatio="w,2:3"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintHorizontal_bias="0.402"
+        app:layout_constraintHorizontal_bias="0.161"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/wallpaper"
-        app:layout_constraintVertical_bias="0.53"
+        app:layout_constraintVertical_bias="0.45"
         app:shapeAppearanceOverlay="@style/circleImageView"
         tools:srcCompat="@tools:sample/avatars" />
 
@@ -107,27 +111,28 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/scrollable"
         app:layout_constraintEnd_toStartOf="@+id/UploadeAt"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.72"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/imageView5"
-        app:layout_constraintVertical_bias="0.357" />
+        app:layout_constraintVertical_bias="0.52" />
 
     <TextView
         android:id="@+id/UploadeAt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="84dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/tajawal_medium"
         android:text="تاريخ النشر:"
+        android:textAlignment="center"
         android:textColor="@color/teal_700"
         android:textDirection="rtl"
-        android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/scrollable"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/job_role"
-        app:layout_constraintVertical_bias="0.578" />
+        app:layout_constraintVertical_bias="0.62" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollable"
@@ -298,17 +303,13 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="50dp"
-                    android:paddingBottom="100dp"
+                    android:paddingBottom="1dp"
                     android:text="تقديم لعمل"
                     android:textColor="@color/white"
-                    android:textStyle="bold"
                     android:textSize="20dp"
                     android:fontFamily="@font/tajawal_medium"
-                    android:shadowColor="#B87F9E"
                     android:layout_marginBottom="20dp"
-                    android:background="@drawable/jobcartcustomshape"
-                    tools:layout_editor_absoluteX="167dp"
-                    tools:layout_editor_absoluteY="272dp" />
+                    android:background="@drawable/jobcartcustomshape" />
             </LinearLayout>
 
 
@@ -321,14 +322,16 @@
         android:id="@+id/BackBotton"
         android:layout_width="55dp"
         android:layout_height="43dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/inputcustom"
         app:layout_constraintBottom_toTopOf="@+id/imageView5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.033"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.13999999"
         app:srcCompat="@drawable/arrow_back_24" />
 
 

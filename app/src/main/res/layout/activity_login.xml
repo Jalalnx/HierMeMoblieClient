@@ -82,7 +82,6 @@
             android:layout_gravity="center"
             android:background="@color/transparent"
             android:fontFamily="@font/tajawal_medium"
-            android:backgroundTint="@color/purple_700"
             android:text="مستخدم جديد ؟ أنشاء حساب" />
 
     </LinearLayout>
