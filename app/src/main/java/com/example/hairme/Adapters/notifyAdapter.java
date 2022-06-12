@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.hairme.Models.Job;
 import com.example.hairme.Models.notify;
 import com.example.hairme.R;
+import com.example.hairme.Services.TimeAgo2;
 
 import java.util.ArrayList;
 
@@ -40,8 +41,8 @@ public class notifyAdapter extends RecyclerView.Adapter<notifyAdapter.Examplevie
     @NonNull
     @Override
     public notifyAdapter.ExampleviewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v= LayoutInflater.from(mcontex).inflate(R.layout.notifycard,parent,false);
-        return  new notifyAdapter.ExampleviewHolder(v);
+        View v = LayoutInflater.from(mcontex).inflate(R.layout.notifycard, parent, false);
+        return new notifyAdapter.ExampleviewHolder(v);
 
     }
 
@@ -52,10 +53,12 @@ public class notifyAdapter extends RecyclerView.Adapter<notifyAdapter.Examplevie
         notify currentItem = notifylist.get(position);
 
         String date = currentItem.getNotify();
-        //get compeny detalis
-//        Job job = currentItem.getJob();
-        ///get logo
 
+        String time = currentItem.getCreatedAt();
+        TimeAgo2 timeAgo2 = new TimeAgo2();
+        String MyFinalValue = timeAgo2.covertTimeToText(time);
+
+        holder.notifydata.setText(MyFinalValue);
         holder.message.setText(date);
 //        holder.compny.setText(name);
 
@@ -67,12 +70,13 @@ public class notifyAdapter extends RecyclerView.Adapter<notifyAdapter.Examplevie
     }
 
     public class ExampleviewHolder extends RecyclerView.ViewHolder {
-        public TextView message;
+        public TextView message, notifydata;
 
 
         public ExampleviewHolder(@NonNull View itemView) {
             super(itemView);
             message = itemView.findViewById(R.id.message);
+            notifydata = itemView.findViewById(R.id.notifydata);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

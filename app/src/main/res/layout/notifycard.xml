@@ -31,7 +31,24 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.368" />
 
-
+        <TextView
+            android:id="@+id/notifydata"
+            android:layout_width="97dp"
+            android:layout_height="23dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginBottom="8dp"
+            android:drawableRight="@drawable/schedule_24"
+            android:fontFamily="@font/tajawal_medium"
+            android:text="زمن النشر"
+            android:textAlignment="center"
+            android:textColor="#14A816"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.897" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

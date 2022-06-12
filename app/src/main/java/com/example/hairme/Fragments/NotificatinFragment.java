@@ -141,8 +141,6 @@ public class NotificatinFragment extends Fragment {
                             notifyList.add(notify);
                         }
                         JobAdapter.notifyDataSetChanged();
-
-//                        notifyAdapter.setOnItemClickListener(HomeFragment.this::onItemClick);
                     }
 
                 } catch (JSONException e) {

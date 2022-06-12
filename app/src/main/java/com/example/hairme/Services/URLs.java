@@ -1,7 +1,7 @@
 package com.example.hairme.Services;
 
 public class URLs {
-    private static final String ROOT_URL = "http://192.168.8.101:8000/user/";
+    private static final String ROOT_URL = "http://192.168.8.100:8000/user/";
 //192.168.137.1
     public static final String URL_REGISTER = ROOT_URL + "register";
     public static final String URL_LOGIN= ROOT_URL + "login";
